@@ -167,17 +167,31 @@ All three posts have misclassification notes in [reditt_labels.csv](data/reditt_
 
 <!-- Your starting model, your settings, and anything you changed and why. -->
 
-**Base model:**
+**Base model:** 
+
+The code uses distilbert-base-uncased, a pretrained DistilBERT model, and fine-tuned it to classify
 
 **Settings:** <!-- epochs, learning rate, batch size, seed -->
 
+EPOCHS = 3
+LEARNING_RATE = 2e-5
+BATCH_SIZE = 16
+
 **Anything I changed from the defaults, and why:**
 
-**Split sizes:** <!-- train / val / test, and per-label counts in the test
-split. If a label had fewer than about 8 in test, say so — it explains a lot
-of next unit's variance. -->
+I didnt change it as a part of Unit 5 though I did test few beyind this as defualt is not giving me good result but I will show the results in Unit 6
 
+**Split sizes:** 139 training / 31 validation / 30 test posts, using a stratified split targeting approximately 70% / 15% / 15%.
 
+| Label | Train | Validation | Test |
+|---|---:|---:|---:|
+| Executive Branch | 68 | 15 | 14 |
+| Legal and Investigations | 27 | 6 | 6 |
+| Foreign Policy | 23 | 5 | 5 |
+| Elections | 21 | 5 | 5 |
+| **Total** | **139** | **31** | **30** |
+
+Legal and Investigations, Foreign Policy, and Elections each have **fewer than eight test examples**. With these small groups, even one additional misclassification can substantially change per-class metrics, contributing to variation across random seeds.
 
 ---
 
@@ -190,19 +204,59 @@ of next unit's variance. -->
      workflow and disclosing it costs you nothing. Not disclosing it is the
      problem. -->
 
+I used Claude to write a code to initial classification
+I used calude to get ideas about how key words so as I can understand the data better
+How to connect to Reditt but it didnt roek
+
 **Moment 1**
 
 - *What I asked for:*
+https://www.reddit.com/r/politics/  and get me 200  psts and generate 200 posts and label. Label is the class /category of the post. I am trying to use it for classification
 - *What came back:*
+Reddit blocked my attempt to open r/politics, so I can’t pull real posts from it. Even without the block, a single page only shows about 25 posts, so getting 200 would need Reddit’s API or a dataset anyway.
+
+There are two ways to get your 200 labeled posts:
+
+Real posts, which is better for training a classifier. I can write you a short Python script using Reddit’s official API (PRAW) that collects 200+ posts from r/politics (title, score, flair, URL, date). You’d run it with free API credentials from reddit.com/prefs/apps. Reddit’s own post flairs could serve as rough labels, and I can add a keyword or LLM-based labeling step on top. Public datasets on Kaggle or Hugging Face are another option if you don’t want to use the API.
+Synthetic posts. I can generate 200 realistic r/politics-style headlines, each with a label, as a CSV file. The categories could be Elections, Congress/Legislation, Judiciary/Courts, Foreign Policy, Economy, Immigration, Healthcare, Climate/Environment, Executive Branch, and Civil Rights. The text would be made up rather than real posts, so it’s fine for prototyping a pipeline but weaker for a model you want to generalize to real Reddit data.
+
+Which one do you want? If you choose the synthetic route, tell me if you want different categories or a different number per category, otherwise I’ll balance them evenly (20 per class).
 - *What I changed:*
 
 **Moment 2**
 
 - *What I asked for:*
+give me a pythocode for that
 - *What came back:*
+I wrote the script, collect_politics_posts.py. I haven’t run it, because I can’t reach Reddit from here.
+
+To run it:
+
+Run pip install praw pandas.
+Create a “script” app at reddit.com/prefs/apps and copy the client ID and secret.
+Set the environment variables REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET and REDDIT_USER_AGENT.
+Run python collect_politics_posts.py.
+
+What it does:
+
+It pulls posts from the hot, top (past month), new and rising listings, removes duplicates and pinned posts, and stops at 200.
+It labels each title with keyword rules into 10 categories (Elections, Judiciary, Congress, Foreign Policy, Economy, Immigration, Healthcare, Climate/Environment, Civil Rights, Executive Branch). Titles that match nothing get “Other”.
+It saves politics_posts_labeled.csv with the title, label, Reddit flair, score, comment count, timestamp and URL, and prints the label counts.
+
+Keep in mind:
+
+Keyword labels are noisy. A title like “Trump signs order on border wall” matches whichever rule comes first, and one post can fit several categories. Spot-check a sample, or use the labels as a first pass and fix them by hand.
+If “Other” gets too large or one class dominates, edit the CATEGORY_KEYWORDS dictionary. For a cleaner dataset, you can replace keyword_label with an LLM call that classifies each title.
+If you train and test on labels made by keyword rules, the model mostly learns those rules back. Hand-correct at least your test set.
+
+I can add an LLM-based labeling step or a train/test split with a baseline classifier (TF-IDF plus logistic regression) if you want either.
+
+I then got psuedo code
 - *What I changed:*
 
 **Pre-labelling disclosure:**
+
+I used claude ideas and then manually reviewed and changed labels
 
 <!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
 
@@ -391,16 +445,16 @@ learned:**
 
      SUBMISSION CHECKLIST — unit 5
 
-       [ ] criteria.md has five numbered criteria, each naming a NUMBER
-       [ ] Each has a reason underneath tied to your data or taxonomy
-       [ ] labels.csv: at least 150 rows, text/label/note, ONE file not split
-       [ ] No label above 70%
-       [ ] All five unit 5 sections have real content
-       [ ] Label Taxonomy includes the decision rule for your hardest boundary
-       [ ] The Dataset includes three hard cases
-       [ ] results.json and test_split.csv committed (the notebook does this)
-       [ ] At least four new commits
-       [ ] Repository URL submitted — WRITE IT DOWN
+       [ X] criteria.md has five numbered criteria, each naming a NUMBER
+       [ X] Each has a reason underneath tied to your data or taxonomy
+       [ X] labels.csv: at least 150 rows, text/label/note, ONE file not split
+       [ X] No label above 70%
+       [ X] All five unit 5 sections have real content
+       [X ] Label Taxonomy includes the decision rule for your hardest boundary
+       [X ] The Dataset includes three hard cases
+       [X ] results.json and test_split.csv committed (the notebook does this)
+       [ X] At least four new commits
+       [X ] Repository URL submitted — WRITE IT DOWN
 
      SUBMISSION CHECKLIST — unit 6
 
