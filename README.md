@@ -39,97 +39,127 @@
 
 ## What This Does
 
-<!-- Your community, and what your classifier sorts posts into. Three or four
-     sentences. -->
-
-
+This project classifies public posts from Reddit's r/NeutralPolitics community by their main political topic. It assigns one of four labels: Executive Branch, Legal and Investigations, Foreign Policy, or Elections. I selected 200 posts from a Kaggle Reddit dataset, used Claude to assist with classification, and manually reviewed and corrected the labels. The project tests whether a classifier can distinguish these topics, especially when executive officials are involved in legal or investigative questions.
 
 ---
 
 ## Label Taxonomy
 
-<!-- Each label: a one-sentence definition and two real examples from your
-     reading. Then your decision rule for the hardest boundary.
+The label names below match `data/reditt_labels.csv` after trimming surrounding whitespace; the CSV spells the legal category `Legal and investigations`. All examples are quoted directly from the file's `text` column. Record numbers count data records, excluding the header.
 
-     The decision rule is worth a point on its own and it's the thing most
-     people leave out. Every taxonomy has a hardest boundary. Name yours. -->
+I plan to use four categories.
 
-### `label_one`
+### `Executive Branch`
 
-**Definition:**
+**Definition:** Posts primarily about presidential or executive agency powers, appointments, administration, policy actions, presidential wrongdoing, presidential statements, presidential actions including justice department and FBI.
 
-**Example 1:**
->
+**Example 1:** (record 10)
 
-**Example 2:**
->
+> Can the President forgive student debt?
 
-### `label_two`
+**Example 2:** (record 71)
 
-**Definition:**
+> Is the pace of President Trump's Cabinet appointments similar to those of previous administrations?
 
-**Example 1:**
->
+### `Legal and investigations`
 
-**Example 2:**
->
+**Definition:** Posts primarily about courts, investigations, alleged wrongdoing, legal proceedings, or whether a specific action violates the law.
+
+**Example 1:** (record 121)
+
+> Robert Mueller has been appointed a special counsel for the Russia probe. What is that and how does it work?
+
+**Example 2:** (record 127)
+
+> What is the legal interpretation of the SCOTUS' refusal to grant cert to an appeal?
+
+### `Foreign Policy`
+
+**Definition:** Posts primarily about international relations, diplomacy, sanctions, treaties, military conflict, or relations between countries.
+
+**Example 1:** (record 148)
+
+> What are the implications of the US backing out of UNESCO?
+
+**Example 2:** (record 153)
+
+> What incentives and new sanctions does Iran face given US withdrawal from the 'Iran Deal?'
+
+### `Elections`
+
+**Definition:** Posts primarily about voting, campaigns, candidates, polling, election results, or electoral systems and procedures.
+
+**Example 1:** (record 175)
+
+> What are the advantages and disadvantages of unconditionally allowing people to vote by mail?
+
+**Example 2:** (record 189)
+
+> What are the arguments for and against gerrymandering?
 
 ### The hardest boundary
 
-**Which two labels:**
+**Which two labels:** `Executive Branch` and `Legal and investigations`.
 
-**The decision rule I used every time:**
-<!-- e.g. "If the post names a specific checkable fact, it's `analysis`, even
-     if the tone is heated." -->
+**The decision rule:** Classify the main question being asked. General questions about executive authority, appointments, administration, or policy belong in `Executive Branch`. Questions centered on an investigation, court proceeding, alleged wrongdoing, or a specific violation of law belong in `Legal and investigations`, even when they name the president, the Justice Department, or the FBI. A person's name or an agency's place in government does not decide the label by itself.
 
+**Consistency limit:** This is the intended boundary rule. The current labels do not apply it perfectly: the Jeff Sessions perjury question in record 1 is labeled `Executive Branch`, although its central question concerns alleged wrongdoing. This is a labeling inconsistency to review separately from the model's prediction errors.
 
+In my manual review, Elections and Foreign Policy generally felt clearer to categorize. I expect confusion in both directions between Executive Branch and Legal and Investigations because their subjects overlap.
 
 ---
 
 ## The Dataset
 
-<!-- Where you collected from, how you labelled, your counts, and three hard
-     cases. -->
+**Where the posts came from:** Public r/NeutralPolitics posts obtained through a Kaggle Reddit dataset. The selected 200-record dataset used for the examples and counts here is [reditt_labels.csv](data/reditt_labels.csv).
 
-**Where the posts came from:**
+**How I labelled them:** I selected the four topic categories and assigned labels, also had Claude classify the posts, and then manually reviewed and corrected the labels. This was an AI-assisted labeling process with human review.
 
-**How I labelled them:** <!-- Cold first? Pre-labelled with AI and corrected?
-Say so plainly — the disclosure is required, not penalised. -->
+The file contains three columns:
 
-**Counts per label:**
+- **`text`:** the Reddit text to be provided to the classifier.
+- **`label`:** the target category used for training and evaluation.
+- **`note`:** my observations about ambiguous records and possible misclassification. These notes document my review and are excluded from classification inputs and classification criteria.
+
+**Counts per label:** Counts use the `label` column with surrounding whitespace removed.
 
 | Label | Count | Share |
-|---|---|---|
-|  |  |  |
-|  |  |  |
-|  |  |  |
-| **Total** |  | 100% |
+|---|---:|---:|
+| Executive Branch | 97 | 48.5% |
+| Legal and investigations | 39 | 19.5% |
+| Foreign Policy | 33 | 16.5% |
+| Elections | 31 | 15.5% |
+| **Total** | **200** | **100.0%** |
+
+Executive Branch represents nearly half the dataset, so I expect the additional examples may help the model learn that category. Legal and Investigations accounts for 19.5%, while Elections is the smallest category at 15.5%. With only 200 posts across four classes, the smaller categories have limited examples in each split, and performance may vary with the split and random seed. These are expectations to test with per-class metrics and a confusion matrix.
 
 **Three hard cases**
 
-<!-- Any post that made you pause: what it was, which two labels it could have
-     been, and what you chose. These are worth more than the easy 190. -->
+All three posts have misclassification notes in [reditt_labels.csv](data/reditt_labels.csv). The first two are labeled `Executive Branch`, and the third is labeled `Legal and investigations`. The explanations below use the reasoning recorded in those notes.
 
-**1.**
-> *The post:*
->
-> *Could have been:*
->
-> *I chose, because:*
+**1. Jeff Sessions and the Russian Ambassador — record 1**
 
-**2.**
-> *The post:*
+> *The post:* Did AG Jeff Sessions commit perjury during his confirmation hearing when he didn’t disclose prior meetings with the Russian Ambassador?
 >
-> *Could have been:*
+> *Could have been:* `Executive Branch` or `Foreign Policy`.
 >
-> *I chose, because:*
+> *I chose, because:* `Executive Branch`. I kept the label for the question about the Attorney General's conduct during his confirmation hearing. My note flags the reference to another country: mentioning the Russian Ambassador could cause a classifier to select Foreign Policy.
 
-**3.**
-> *The post:*
+**2. The Fed injecting money into the economy — record 31**
+
+> *The post:* How Can the Fed Inject $1.5 Trillion Into the Economy?
 >
-> *Could have been:*
+> *Could have been:* `Executive Branch` or `Economy`, if Economy is added as a future category. Economy is not one of the current four labels.
 >
-> *I chose, because:*
+> *I chose, because:* `Executive Branch`. My note groups the Fed's action under this category and flags the economic subject matter as a possible source of confusion if an Economy label is added. This describes the category assigned in my dataset and a potential future boundary.
+
+**3. Donald Trump Jr.'s emails — record 98**
+
+> *The post:* Do the recently released emails relating to Donald Trump Jr. indicate any criminal wrongdoing?
+>
+> *Could have been:* `Legal and investigations` or `Executive Branch`.
+>
+> *I chose, because:* `Legal and investigations`. My note warns that the Trump name could make the classifier select Executive Branch. The question is about whether the emails indicate criminal wrongdoing, so I chose Legal and Investigations.
 
 ---
 
