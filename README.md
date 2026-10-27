@@ -39,9 +39,20 @@
 
 ## What This Does
 
-This project classifies public posts from Reddit's r/NeutralPolitics community by their main political topic. It assigns one of four labels: Executive Branch, Legal and Investigations, Foreign Policy, or Elections. I selected 200 posts from a Kaggle Reddit dataset, used Claude to assist with classification, and manually reviewed and corrected the labels. The project tests whether a classifier can distinguish these topics, especially when executive officials are involved in legal or investigative questions.
+I have created my own datset and not used the dataset provided in the assignments (i.e. noteven augmented that dataset)
 
----
+In this project I am classifing public posts from Reddit's r/NeutralPolitics community by their main political topic. It assigns one of four labels: Executive Branch, Legal and Investigations, Foreign Policy, or Elections. I selected 200 posts from a Kaggle Reddit dataset, used Claude to assist with classification, and manually reviewed and corrected the labels as claude did not classify properly. The project tests whether a classifier can distinguish these topics, especially when executive officials are involved in legal or investigative questions. I didnot want to use the dataset already provided instead wanted to go through the process of generating dataset myself to understand how difficult it is to manually label it.
+
+**Why fourth label** In my datset of neutral politics subreditt (original 1000 rows picked top three classes as identified by claude i.e. 3 of approx 10 classes) for a 200 row dataset as per the assignment. In this list original Redit the original class had 125 Executive branch , 35 Foreign policy and 40 Elections(3 label classes). I had a Smaller pool of 19 "Legal and Investigations". Inorder to understand the categories  I asked claude to do the inital lable and that give me an apprximate distribution of label count for the different categories and I selected the top 3 as indicated earlier. I  then noticed Claude had mislabled many of the "executive Branch" and "Legal and Investigation class" . I saw legal and Elections also having some misclassifications. So my thought process was that if I include legal and investigations and reduce the Executive branch a bit that will improve the imballance but leave the difficult classification  problem still there which would help me learn the nuances.
+
+So I took the legal and investigations and merged immigration related data and identified misclasified by Claude rows(ie showing as "Executive Branch" but actually legal and investigations) and created a good class for investigations and thus created the fourth class. 
+
+**My Thought process and execution strategy**
+My intent was that his will be difficult dayaset and that will help me learn the nuances of calssification model hypertuning. I got good result and all within criteria baring one calls i.e legal and investigation which was higher than what I wanted. So I decided to augment the dataset.
+
+Since I was not abel to connect to Reddit and pull data and I had exhausted the dataset from Kaggel  so I had to take helpo from Claude and asked it to look into my datset and create synthetic data for three lables  for 50 each of "Legal and Investigations", Foreign Policy and Elections. All these synthtic data were add after the 200 th row of the originakl data.
+
+But I added one class at a time and  after every calss getting augment I executed the notebook to see the results and the "Legal and Investigatins" improved startight away , Then Iadded to the the smallest class  and then the next smallest. After all these were add I did one more round of execution and I saw that dataset class imbalance was redcuced an lot and was very acceptable. The accuracy hit what I was trying to across all my criteria.. The latest takemeter.ipynb has the modified code which uses hyper parameter optimization, checkpointing of model and increased epoch so we are able to train and then exit the model when the validation loss is the minimal thereby avoid overfitting. 
 
 ## Label Taxonomy
 
@@ -193,6 +204,16 @@ I didnt change it as a part of Unit 5 though I did test few beyind this as defua
 
 Legal and Investigations, Foreign Policy, and Elections each have **fewer than eight test examples**. With these small groups, even one additional misclassification can substantially change per-class metrics, contributing to variation across random seeds.
 
+**What I changed to get better results (copied from takemeter.ipynb file) as a part of 2nd run**
+- Epoch changed to 25 as original value 3 was not doing enough training and making it to 25 with a auto skip with checkpointing once we have get the best validation loss gives us the best model performance  
+- Learning rate improved when I reduced and this is the best learning rate that I found after few iterations of tuning and testing the model performance on validation set.
+
+- EPOCHS = 25 .. it skipps as soon as we have got the best training results once the validation loss starts increasing
+- LEARNING_RATE = 8.8e-6 .. reduced so as the learing gets better without sacrificing training speed
+- BATCH_SIZE = 16
+
+
+
 ---
 
 ## How I Used AI
@@ -256,7 +277,40 @@ I then got psuedo code
 
 **Pre-labelling disclosure:**
 
-I used claude ideas and then manually reviewed and changed labels
+I used claude ideas for inital class identification and then manually reviewed and changed labels and deleted rows which didnt match my needed labels
+
+**Results of Second training Run**
+
+The following results are from the saved outputs of Sections 6 and 7 in takemeter.ipynb, using the augmented 350-record dataset and 53 held-out test examples per seed. The three-seed results are also saved in results_three_seeds_before.json.
+
+#### Section 6 Results from takemeter.ipynb — Three-seed results
+
+| Measure | Seed 42 | Seed 7 | Seed 2024 | Spread |
+|---|---|---|---|---|
+| Overall accuracy | 0.830 | 0.887 | 0.887 | 0.057 |
+| Macro F1 | 0.837 | 0.892 | 0.889 | 0.055 |
+| F1 — `Executive Branch` | 0.750 | 0.839 | 0.857 | 0.107 |
+| F1 — `Legal and investigations` | 0.720 | 0.857 | 0.880 | 0.160 |
+| F1 — `Foreign Policy` | 0.923 | 0.917 | 0.960 | 0.043 |
+| F1 — `Elections` | 0.957 | 0.957 | 0.857 | 0.099 |
+
+**Average accuracy: 86.79%. Average macro F1: 0.8727.** These are the arithmetic means of the three per-seed scores. Spread is the maximum minus the minimum score; the accuracy spread is **5.66 percentage points** before rounding to the table's three decimal places. Legal and investigations has the largest per-class F1 spread, at **0.160**.
+
+#### Section 7 Results from takemeter.ipynb — Confusion matrix (seed 42)
+
+Section 7 displays the first seed's confusion matrix (`all_results[0]`, seed 42). Rows are the true labels and columns are the predictions.
+
+| true \ predicted | Executive Branch | Legal and investigations | Foreign Policy | Elections |
+|---|---|---|---|---|
+| **Executive Branch** | 12 | 3 | 0 | 0 |
+| **Legal and investigations** | 3 | 9 | 1 | 0 |
+| **Foreign Policy** | 1 | 0 | 12 | 0 |
+| **Elections** | 1 | 0 | 0 | 11 |
+
+The largest off-diagonal count is **3**, occurring in both directions between Executive Branch and Legal and investigations: three Executive Branch posts were predicted as Legal and investigations, and three Legal and investigations posts were predicted as Executive Branch. This matrix contains **44 correct predictions out of 53**, giving seed 42 an accuracy of **83.02%**.
+
+**50 extra examples for the thinnest label**
+In the earlier section when i discussed dataset I already covered how I augemtented the original 200 and in steps of 50 per class and perfromed various results. During this execrcise I also proved a better balanced dataset  (or where class imballance is not extreme) results get better assuming we ahve good number of rows of data per class(mine were between 80 and 98)
 
 <!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
 
