@@ -77,7 +77,7 @@ I plan to use four categories.
 
 ### `Legal and investigations`
 
-**Definition:** Posts primarily about courts, investigations, alleged wrongdoing, legal proceedings, or whether a specific action violates the law.
+**Definition:** Posts about courts, judges, criminal or special-counsel investigations, indictments, perjury, impeachment, alleged wrongdoing,legal proceedings, immigration, and other questions of legality and violation of law.
 
 **Example 1:** (record 121)
 
@@ -101,7 +101,7 @@ I plan to use four categories.
 
 ### `Elections`
 
-**Definition:** Posts primarily about voting, campaigns, candidates, polling, election results, or electoral systems and procedures.
+**Definition:** Posts about voting, campaigns, candidates, polling, election results, debates or electoral systems and election procedures.
 
 **Example 1:** (record 175)
 
