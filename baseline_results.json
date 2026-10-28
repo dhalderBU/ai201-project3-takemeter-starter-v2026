@@ -1,0 +1,265 @@
+{
+  "model": "facebook/bart-large-mnli",
+  "n": 45,
+  "seed": 42,
+  "held_out": true,
+  "used_definitions": true,
+  "scores": {
+    "n": 45,
+    "accuracy": 0.7111111111111111,
+    "f1_macro": 0.6790023701788408,
+    "per_label": {
+      "Elections": {
+        "precision": 0.8571428571428571,
+        "recall": 1.0,
+        "f1": 0.923076923076923,
+        "support": 12
+      },
+      "Executive Branch": {
+        "precision": 0.8333333333333334,
+        "recall": 0.3333333333333333,
+        "f1": 0.47619047619047616,
+        "support": 15
+      },
+      "Foreign Policy": {
+        "precision": 0.7857142857142857,
+        "recall": 0.9166666666666666,
+        "f1": 0.8461538461538461,
+        "support": 12
+      },
+      "Legal and investigations": {
+        "precision": 0.36363636363636365,
+        "recall": 0.6666666666666666,
+        "f1": 0.4705882352941177,
+        "support": 6
+      }
+    }
+  },
+  "predictions": [
+    {
+      "text": "What role do endorsements play in primary elections?",
+      "gold": "Elections",
+      "predicted": "Elections"
+    },
+    {
+      "text": "Is Israel an apartheid state?",
+      "gold": "Foreign Policy",
+      "predicted": "Foreign Policy"
+    },
+    {
+      "text": "How did ballot access laws affect third-party candidates in the last cycle?",
+      "gold": "Elections",
+      "predicted": "Elections"
+    },
+    {
+      "text": "What started the investigation(s) into the Prime Minister of Israel, Benjamin Netanyahu, and what charges have the police already recommended against him? Is there evidence to support Netanyahu's claim the investigation is biased against him?",
+      "gold": "Legal and investigations",
+      "predicted": "Legal and investigations"
+    },
+    {
+      "text": "What are the process and limits of the presidential pardon in light of Michael Flynn's lawyer stating it is \"An under-utilized tool of political power.\"",
+      "gold": "Executive Branch",
+      "predicted": "Legal and investigations"
+    },
+    {
+      "text": "How do local elections for school boards and city councils differ from national ones?",
+      "gold": "Elections",
+      "predicted": "Elections"
+    },
+    {
+      "text": "Do voters tend to punish the president's party in midterm elections?",
+      "gold": "Elections",
+      "predicted": "Elections"
+    },
+    {
+      "text": "Trump Elected President - What Comes Next",
+      "gold": "Executive Branch",
+      "predicted": "Elections"
+    },
+    {
+      "text": "What is birthright citizenship what are the pros and cons to birthright citizenship and what would the constitutionality be for an executive order to end birthright citizenship? (More in text)",
+      "gold": "Executive Branch",
+      "predicted": "Legal and investigations"
+    },
+    {
+      "text": "Is this election an [almost] perfect storm for a perfect a third party candidate? Or at least record-breaking voting for a third party candidate.",
+      "gold": "Elections",
+      "predicted": "Elections"
+    },
+    {
+      "text": "What factors determine whether a state is considered a battleground?",
+      "gold": "Elections",
+      "predicted": "Elections"
+    },
+    {
+      "text": "2022 Georgia Elections: Conservative Activists Wage Campaign To Purge Voter Rolls Ahead Of The Nov. Election - The Physical Manifestation Of A Law Passed By The Republican-Controlled State Legislature In 2021",
+      "gold": "Elections",
+      "predicted": "Elections"
+    },
+    {
+      "text": "In light of Lebron James' announcement to support Clinton - What historical effect have high profile celebrities/athletes had on polling/voting in their respective state?",
+      "gold": "Elections",
+      "predicted": "Elections"
+    },
+    {
+      "text": "Is there legal precedent for Mueller's team behaviour regarding Concord Management's defence, and it is revealing of underlying issues with his legal case against them?",
+      "gold": "Legal and investigations",
+      "predicted": "Legal and investigations"
+    },
+    {
+      "text": "Are there any contingencies in place if the President of the U.S. makes false statements and/or spreads false information? Can a president or their administration be held accountable for making false statements and claiming them to be true?",
+      "gold": "Executive Branch",
+      "predicted": "Executive Branch"
+    },
+    {
+      "text": "What are the arguments for and against the US engaging directly with an adversarial government?",
+      "gold": "Foreign Policy",
+      "predicted": "Foreign Policy"
+    },
+    {
+      "text": "How do the major US parties handle deaths of presumptive nominees or nominees?",
+      "gold": "Elections",
+      "predicted": "Elections"
+    },
+    {
+      "text": "What are the First Amendment implications now that Cowboys owner Jerry Jones has stated that players will be benched if they do not stand for the national anthem?",
+      "gold": "Executive Branch",
+      "predicted": "Legal and investigations"
+    },
+    {
+      "text": "How does the Obama Administration's record on appointing donors and bundlers to government positions compare to Reagan, Bush 1&2 and Clinton administration.",
+      "gold": "Executive Branch",
+      "predicted": "Elections"
+    },
+    {
+      "text": "What are the biggest foreign policy challenges facing the next US president?",
+      "gold": "Foreign Policy",
+      "predicted": "Foreign Policy"
+    },
+    {
+      "text": "How accurate were last year's election forecasts compared with the final results?",
+      "gold": "Elections",
+      "predicted": "Elections"
+    },
+    {
+      "text": "Why are so many people from places like Central America seeking asylum in the US and how does US law apply to the waves of migrants currently trying to enter the country?",
+      "gold": "Legal and investigations",
+      "predicted": "Legal and investigations"
+    },
+    {
+      "text": "The turnout in the French election is expected to reach 80% what causes higher turnout there than in the US?",
+      "gold": "Elections",
+      "predicted": "Elections"
+    },
+    {
+      "text": "What new information is contained in the 7/13 OSC indictments?",
+      "gold": "Legal and investigations",
+      "predicted": "Legal and investigations"
+    },
+    {
+      "text": "Who is Mike Pence? What does he stand for? What has he accomplished?",
+      "gold": "Executive Branch",
+      "predicted": "Executive Branch"
+    },
+    {
+      "text": "One year after the Iran Deal, in what ways is the world better and worse off?",
+      "gold": "Foreign Policy",
+      "predicted": "Foreign Policy"
+    },
+    {
+      "text": "How does the number of resignations and firings during the Trump administration compare to past administrations?",
+      "gold": "Executive Branch",
+      "predicted": "Foreign Policy"
+    },
+    {
+      "text": "Allies have criticized a recent US decision on a foreign conflict. What are the main points of disagreement?",
+      "gold": "Foreign Policy",
+      "predicted": "Foreign Policy"
+    },
+    {
+      "text": "What are the ethics law and precedent around unmasking anonymous people who allegedly oppose the US President?",
+      "gold": "Executive Branch",
+      "predicted": "Legal and investigations"
+    },
+    {
+      "text": "Congress has overridden Obama's veto on the 'Saudi Sept 11' bill. What are the consequences of this?",
+      "gold": "Executive Branch",
+      "predicted": "Foreign Policy"
+    },
+    {
+      "text": "What was the legal authority for the US attack on Syria?",
+      "gold": "Foreign Policy",
+      "predicted": "Legal and investigations"
+    },
+    {
+      "text": "What strategic benefits would North Korea gain from a preemptive attack on Guam?",
+      "gold": "Foreign Policy",
+      "predicted": "Foreign Policy"
+    },
+    {
+      "text": "Can the Vice President force legislation from the U.S. House of Representatives before the U.S. Senate for a vote?",
+      "gold": "Executive Branch",
+      "predicted": "Executive Branch"
+    },
+    {
+      "text": "Why is the US relationship with Saudi Arabia considered strategically important?",
+      "gold": "Foreign Policy",
+      "predicted": "Foreign Policy"
+    },
+    {
+      "text": "What is the evidence for and against China being a competitor and/or threat to U.S. power?",
+      "gold": "Foreign Policy",
+      "predicted": "Foreign Policy"
+    },
+    {
+      "text": "Did AG Jeff Sessions commit perjury during his confirmation hearing when he didn\u2019t disclose prior meetings with the Russian Ambassador?",
+      "gold": "Executive Branch",
+      "predicted": "Legal and investigations"
+    },
+    {
+      "text": "The Trump Administration is investigating automakers for agreeing with California on emissions standards. Is this a legitimate antitrust issue",
+      "gold": "Legal and investigations",
+      "predicted": "Executive Branch"
+    },
+    {
+      "text": "Presidential Executive Order Amending Executive Order 13223: Who does this affect, and what historical precedents does this have?",
+      "gold": "Executive Branch",
+      "predicted": "Executive Branch"
+    },
+    {
+      "text": "How does the timing of a state's primary affect its influence?",
+      "gold": "Elections",
+      "predicted": "Elections"
+    },
+    {
+      "text": "How does the US decide which countries receive foreign aid?",
+      "gold": "Foreign Policy",
+      "predicted": "Foreign Policy"
+    },
+    {
+      "text": "What have we learned from the principal conclusions of Robert Mueller\u2019s investigation released tonight?",
+      "gold": "Legal and investigations",
+      "predicted": "Foreign Policy"
+    },
+    {
+      "text": "The Trump administration is looking at the possibility of direct cash payments to Americans to mitigate the economic hardships of Covid-19. Logistically how can the US government provide cash payments to citizens and has this ever been done before?",
+      "gold": "Executive Branch",
+      "predicted": "Executive Branch"
+    },
+    {
+      "text": "What are the jurisdictional relationships between the local police departments and many federal agencies in and around Washington, D.C.?",
+      "gold": "Executive Branch",
+      "predicted": "Legal and investigations"
+    },
+    {
+      "text": "How does the US respond to competing territorial claims in the Arctic?",
+      "gold": "Foreign Policy",
+      "predicted": "Foreign Policy"
+    },
+    {
+      "text": "What led to the breakdown of arms control agreements between the US and Russia?",
+      "gold": "Foreign Policy",
+      "predicted": "Foreign Policy"
+    }
+  ]
+}

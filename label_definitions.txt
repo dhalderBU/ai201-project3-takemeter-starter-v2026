@@ -5,6 +5,11 @@
 #
 # Delete the examples below and put yours in.
 
-analysis: makes an argument backed by a specific, checkable fact
-hot_take: a confident claim with no support offered
-reaction: an immediate response to something that just happened
+#analysis: makes an argument backed by a specific, checkable fact
+#hot_take: a confident claim with no support offered
+#reaction: an immediate response to something that just happened
+
+"Elections": "Posts about voting, campaigns, candidates, polling, election results, debates or electoral systems and election procedures."
+"Executive Branch": "Posts primarily about presidential or executive agency powers, appointments, administration, policy actions, presidential wrongdoing, presidential statements, presidential actions including justice department and FBI"
+"Legal & Investigations": "Posts about courts, judges, criminal or special-counsel investigations, indictments, perjury, impeachment, alleged wrongdoing,legal proceedings, immigration, and other questions of legality and violation of law."
+"Foreign Policy": "Posts primarily about international relations, diplomacy, sanctions, treaties, military conflict, or relations between countries."

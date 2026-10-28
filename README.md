@@ -330,6 +330,18 @@ In the earlier section when i discussed dataset I already covered how I augemten
 
 <!-- Both models on the same posts. `python baseline.py --trained results.json`
      prints this table for you. -->
+**After the baseline run**
+
+| Measure | Baseline |
+|---|---|
+| Overall accuracy | 0.711 |
+| Macro F1 | 0.679 |
+| F1 — `Elections` | 0.923 |
+| F1 — `Executive Branch` | 0.476 |
+| F1 — `Foreign Policy` | 0.846 |
+| F1 — `Legal and investigations` | 0.471 |
+
+**After Baseline with trained results execution**
 
 | Measure | Baseline | Trained | Difference |
 |---|---|---|---|
@@ -341,6 +353,8 @@ In the earlier section when i discussed dataset I already covered how I augemten
 **What I predicted before I looked:**
 <!-- Milestone 1 asks you to write this BEFORE seeing the trained numbers. A
      prediction made afterwards isn't one. -->
+
+My prediction is that both Executive Brnanch and "Legal and Investigations" class will will better F1 score after basic finetuning (with default value before any hyperpartamter changes).
 
 **What the gap actually means:**
 <!-- If the baseline matched your trained model, your fine-tuning added
