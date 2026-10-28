@@ -59,16 +59,16 @@ and evaluation, never as an inference input. The `note` column is personal
 commentary about potential classification ambiguity and is excluded from training data
 and criteria.
 
-The verified counts are **97 Executive Branch, 39 Legal & Investigations,
+The verified counts are **97 Executive Branch, 39 Legal and Investigations,
 33 Foreign Policy, and 31 Elections**, totaling **200 labeled posts**.
 Trim label whitespace and map `Legal and investigations` to
-`Legal & Investigations` before counting or splitting so there are exactly
+`Legal and Investigations` before counting or splitting so there are exactly
 four categories.
 
 | Label | Posts | Share | Verified test posts per seed |
 |---|---:|---:|---:|
 | Executive Branch | 97 | 48.5% | 14 |
-| Legal & Investigations | 39 | 19.5% | 6 |
+| Legal and Investigations | 39 | 19.5% | 6 |
 | Foreign Policy | 33 | 16.5% | 5 |
 | Elections | 31 | 15.5% | 5 |
 | **Total** | **200** | **100.0%** | **30** |
@@ -124,7 +124,7 @@ Every label must meet its own F1 threshold in each seed:
 | Label | Minimum F1 |
 |---|---:|
 | Executive Branch | 0.70 |
-| Legal & Investigations | 0.60 |
+| Legal and Investigations | 0.60 |
 | Foreign Policy | 0.60 |
 | Elections | 0.55 |
 
@@ -138,7 +138,7 @@ Elections still the smallest category in the full dataset.
 
 ## 4. Recall of at least 60% across the three smaller categories
 
-Among all test posts truly labeled **Legal & Investigations, Elections, or
+Among all test posts truly labeled **Legal and Investigations, Elections, or
 Foreign Policy, at least 60% must receive their exact correct label** in each
 seed. Divide correct predictions within these three categories by the total
 number of true posts in those categories. This is pooled recall over the
