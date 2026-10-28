@@ -345,23 +345,26 @@ In the earlier section when i discussed dataset I already covered how I augemten
 
 | Measure | Baseline | Trained | Difference |
 |---|---|---|---|
-| Overall accuracy |  |  |  |
-| Macro F1 |  |  |  |
-| F1 — `label_one` |  |  |  |
-| F1 — `label_two` |  |  |  |
+| Overall accuracy | 0.711 | 0.844 | +0.133 |
+| Macro F1 | 0.679 | 0.687 | +0.008 |
+| F1 — `Elections` | 0.923 | 0.957 | +0.033 |
+| F1 — `Executive Branch` | 0.476 | 0.833 | +0.357 |
+| F1 — `Foreign Policy` | 0.846 | 0.960 | +0.114 |
+| F1 — `Legal and investigations` | 0.471 | 0.000 | -0.471 |
+
 
 **What I predicted before I looked:**
 <!-- Milestone 1 asks you to write this BEFORE seeing the trained numbers. A
      prediction made afterwards isn't one. -->
 
-My prediction is that both Executive Brnanch and "Legal and Investigations" class will will better F1 score after basic finetuning (with default value before any hyperpartamter changes).
+My prediction is that both "Executive Branch" and "Legal and Investigations" class will will better F1 score after basic finetuning (with default value before any hyperpartamter changes).
 
 **What the gap actually means:**
 <!-- If the baseline matched your trained model, your fine-tuning added
      nothing — and that is a real finding, not a failure. Say it plainly. -->
 
-
-
+Finding : **It improved results for** "Executive branch"(0.357) and slightly improved the f1 score for "Foreign policy"(0.114) and very small amount for "Elections" (0.033)
+**what performed badly** "Legal and investigations" **(- 0.471)** so it seems Legal and investigations is getting wrongly classified to "Executive Branch". When I look into the data of Legal and investigations, many of the rows are legal and investigation against Executive Branch and english terms which are used boththe classes. Executive Branch had 98 record which is the highest of all still it did not do that great. So i may have to train more rounds (i.e. increase epochs) or we can add more rows of the class lable "Legal and investigations" (i.e improve trainin on legal class and improve class imbalance)  and then we can fine tune it too by using hyper parameter optimization
 ---
 
 ## Run Log — Before
