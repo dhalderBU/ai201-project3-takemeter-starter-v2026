@@ -264,7 +264,7 @@ Each category has **10–13 test examples**, so none has fewer than eight. These
 - in the takemeter.ipynb the training function I have modified to run larger epoch and avoid overfitting . It continues to train till the Validation error goes down till max epoch is exhausted (intend to use upto 25) . While doing this it checkpoints the model so as it can revert back to the best performing model (it stops at the point where the validation error is the lowest and the subsequent next two validation error is higher)    
 - I also tried using a lopwer learnign rate ie used 1e-5 but the overall perfromance did not improve but will use the lower parameter as that should give us better perfromance of model when epochs are higher.
 - EPOCHS = 25 .. it skipps as soon as we have got the best training results once the validation loss starts increasing
-- LEARNING_RATE = 1e-5 .. reduced so as the learning gets better without sacrificing training speed
+- LEARNING_RATE = 1e-5 .. reduced so as the learning gets better without sacrificing training speed but very minor difference  with original so I may stay with the original
 - BATCH_SIZE = 16
 
 ---
@@ -513,6 +513,33 @@ In seed 2024, the problem extends beyond the Executive–Legal boundary: the mod
 
 **Since misclassification is spread across multiple classes and happening on multiple classes so it could also be a training issues. So we will try to fine tune with larger number of epochs before going deep into other things. Even the dtaset behaves very differently across different seeds that either says either the representative data in each class is low, or the classes have overlap which is possible in my domain that i picked or it could be training. So I will start with training(as it will be very quick to rule out by doing a little more training) and then look into other areas**
 
+
+### Stretch Features : Per lable error writeup
+#### Seed 42 — misclassified test posts
+
+**16 of 45 posts misclassified.** Predictions match the saved seed-42 confusion matrix.
+
+Dataset row refers to `labels.csv`; test row refers to `test_split.csv`. Both use 1-based data-record numbers, excluding the header. We see from the below set of mis-classified 16 rows and it mostly looks trainin issue and not a labeling issue .
+
+| Dataset row | Test row | Post | Actual label | Predicted label | Comment |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| 15 | 15 | What are the pros and cons of running the Executive Branch like a corporation? | Legal and investigations | Executive Branch | ts a labeling issue, core Federal  item which is a Executive Branch  |
+| 26 | 30 | What could a Vice President theoretically do in their capacity as “President of the Senate?” | Executive Branch | Elections | very simple post it looks like traing issue |
+| 45 | 33 | Could a wealthy enough President just pay for large public work initiatives by him/herself? | Executive Branch | Elections | very simple post it looks like traing issue|
+| 53 | 27 | How much is Trump financially benefiting from this vacations? | Executive Branch | Foreign Policy | it shows that post has nothing to do qwith foeign policy so training issue |
+| 60 | 25 | What happens when the Secret Service runs out of money? | Executive Branch | Foreign Policy | very simple post it looks like traing issue |
+| 63 | 38 | Can the Attorney General or the President fire Geoffrey Berman the US Attorney for the Southern District of New York? | Executive Branch | Legal and investigations | This is a overlap issue  |
+| 69 | 40 | In Trump v. Hawaii (travel ban), the Supreme Court ruled the President's past statements should not be considered when reviewing that directive. Does this mean statements counter to Trump's Emergency Declaration, like "I didn’t need to do this," won't be considered in upcoming litigation? | Legal and investigations | Executive Branch | its clearly legal issue so coould be training|
+| 79 | 28 | Robert Mueller has been appointed a special counsel for the Russia probe. What is that and how does it work? | Legal and investigations | Foreign Policy | a clear case of legal but classifiied as Foreign policy, training issue |
+| 86 | 45 | Do states typically have to guard supplies from the federal government? What is being done with the seized supplies? | Legal and investigations | Foreign Policy | This can never by Foreign policy, so training issue  |
+| 87 | 22 | Why are so many people from places like Central America seeking asylum in the US and how does US law apply to the waves of migrants currently trying to enter the country? | Legal and investigations | Foreign Policy | this is a boundary not clearly set issue |
+| 88 | 41 | Did AG Jeff Sessions commit perjury during his confirmation hearing when he didn’t disclose prior meetings with the Russian Ambassador? | Legal and investigations | Foreign Policy | This is clearly legal issues, could be due to training  |
+| 101 | 37 | Could the House of Representatives reopen the impeachment inquiry and subpoena John Bolton to testify? | Legal and investigations | Elections | this is legal regarding impeachment but classified as Elections, training issue |
+| 107 | 14 | What is the precedent for Law Enforcement refusing to enforce certain laws they find Unconstitutional, and how is this countered/balanced out? | Legal and investigations | Executive Branch | There are no words which should make it Executinve branch, so trnaing issue |
+| 108 | 24 | California reduced the penalty for knowingly exposing a person to HIV from a felony to a misdemeanor. What are the arguments for and against this reduction? | Legal and investigations | Executive Branch | Thisis a clear legal issue and has no terms of Executive Brnach, so trainin issue |
+| 120 | 4 | Donna Brazile said the DNC’s joint fundraising agreement with Hillary’s campaign wasn’t illegal. Does this hold water? How does US law regulate political parties anyway? | Legal and investigations | Executive Branch | This is a clear legal issue and nothing to do with Executive branch, so training issue |
+| 165 | 44 | Congress has overridden Obama's veto on the 'Saudi Sept 11' bill. What are the consequences of this? | Foreign Policy | Executive Branch | This is clearly a training issue but ther is a overlap of legal and exec branch |
+
 ---
 
 ## Agreement Report
@@ -572,38 +599,158 @@ In seed 2024, the problem extends beyond the Executive–Legal boundary: the mod
 ## The Improvement
 
 **What I changed:**
+I just increased teh epoch with auto exit so as if the validation error increases but training error comes down then training staops and it picks the best model upto that state. The results improved but i still results spread slightly above 0.10 . I am using 
 
 **Which diagnosis pointed at it:**
+As mentioned in the earlier 16 record misclassified  mostly looked misclassification due to training  and only few had overlap issue.
 
-### Run Log — After
+### Run Log — After (results_three_seeds_after.json)
+
+Results from `takemeter.ipynb` and `results_three_seeds_after.json`. Per-label order: **Executive / Legal / Foreign Policy / Elections**.
 
 | Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
 |---|---|---|---|---|---|
-| 1.  |  |  |  |  |  |
-| 2.  |  |  |  |  |  |
-| 3.  |  |  |  |  |  |
-| 4.  |  |  |  |  |  |
-| 5.  |  |  |  |  |  |
+| 1. Overall accuracy | ≥ 0.650 in every seed | 0.822 (37/45) | 0.956 (43/45) | 0.867 (39/45) | MET |
+| 2. Macro F1 | ≥ 0.650 in every seed | 0.816 | 0.953 | 0.850 | MET |
+| 3. F1 for every label | ≥ 0.70 / 0.60 / 0.60 / 0.55 in every seed | 0.727 / 0.700 / 0.880 / 0.957 | 0.909 / 0.947 / 1.000 / 0.957 | 0.800 / 0.750 / 0.929 / 0.923 | MET |
+| 4. Pooled recall: Legal, Foreign Policy, Elections | ≥ 0.600 in every seed | 0.829 (29/35) | 0.943 (33/35) | 0.886 (31/35) | MET |
+| 5. Accuracy stability | Spread ≤ 0.10 overall and per class | Recall: 0.800 / 0.700 / 0.846 / 0.917 | Recall: 1.000 / 0.900 / 1.000 / 0.917 | Recall: 0.800 / 0.600 / 1.000 / 1.000 | MISSED |
+
+Accuracy spread is **0.133 overall**; per-class recall spreads are **0.200 / 0.300 / 0.154 / 0.083**. Only Elections meets the stability limit.
 
 **Did it help, and how do I know:**
+
+Accuracy spread failed by a small margin. but now of the five criteria 4 criteria passed.  but basedon the analysis of the rows misclassified I see multiple rows having labeling isses which I had missed earlier.
+ 
+
+### Seed 42 — misclassified test posts
+
+**8 of 45 posts misclassified.** Predictions match the current seed-42 results from Section 5.
+
+Dataset row refers to `./labels.csv`; test row refers to the Section 5 test split exported as `test_split.csv`. Both use 1-based data-record numbers, excluding the header.
+
+| Dataset row | Test row | Post | Actual label | Predicted label | Comment |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| 63 | 38 | Can the Attorney General or the President fire Geoffrey Berman the US Attorney for the Southern District of New York? | Executive Branch | Legal and investigations | Labeling issue should be Legal |
+| 65 | 5 | What are the process and limits of the presidential pardon in light of Michael Flynn's lawyer stating it is "An under-utilized tool of political power." | Executive Branch | Legal and investigations | labeling issue  |
+| 86 | 45 | Do states typically have to guard supplies from the federal government? What is being done with the seized supplies? | Executive Branch | Legal and investigations | this is labeling issue, this is federal issue  |
+| 87 | 22 | Why are so many people from places like Central America seeking asylum in the US and how does US law apply to the waves of migrants currently trying to enter the country? | Legal and investigations | Foreign Policy | labeling issue , should be Foreign Policy |
+| 120 | 4 | Donna Brazile said the DNC’s joint fundraising agreement with Hillary’s campaign wasn’t illegal. Does this hold water? How does US law regulate political parties anyway? | Legal and investigations | Executive Branch | Overlap issue |
+| 151 | 31 | After President Trump’s trip to Europe German Chancellor Angela Merkel said "The times in which we could rely fully on others — they are somewhat over.” Does this statement have precedent? | Foreign Policy | Executive Branch | overlap issue |
+| 165 | 44 | Congress has overridden Obama's veto on the 'Saudi Sept 11' bill. What are the consequences of this? | Foreign Policy | Executive Branch | Labeling issue, should be Executive Branch  |
+| 195 | 11 | What are the pros and cons of South Dakota's recently overturned anti-corruption law? | Elections | Legal and investigations | labeling issue should be legal |
 
 <!-- If it didn't, say so. Relabelling that didn't help is a genuinely
      interesting result and earns full credit. -->
 
+### Stretch Feature - Unit 6 - 2nd measured improvement - improved compared to earlier run
 
+After some labeling and rerunning the training we get the following: 
+
+| Measure | Seed 42 | Seed 7 | Seed 2024 | Spread |
+|---|---|---|---|---|
+| Overall accuracy | 0.889 | 0.933 | 0.867 | 0.067 |
+| Macro F1 | 0.880 | 0.929 | 0.855 | 0.074 |
+| F1 — `Executive Branch` | 0.783 | 0.909 | 0.800 | 0.126 |
+| F1 — `Legal and investigations` | 0.778 | 0.889 | 0.737 | 0.152 |
+| F1 — `Foreign Policy` | 0.960 | 0.963 | 0.960 | 0.003 |
+| F1 — `Elections` | 1.000 | 0.957 | 0.923 | 0.077 |
+
+**Improvement noticed**
+
+
+Accuracy moved 0.067 across seeds. Enough that a criterion landing within that band can't really be called either way.
+
+Below is the latest confusion matrix
+
+| true \ predicted | Executive Branch | Legal and investigations | Foreign Policy | Elections |
+|---|---|---|---|---|
+| **Executive Branch** | 9 | 1 | 0 | 0 |
+| **Legal and investigations** | 3 | 7 | 0 | 0 |
+| **Foreign Policy** | 1 | 0 | 12 | 0 |
+| **Elections** | 0 | 0 | 0 | 12 |
+
+Biggest confusion: 3 real `Legal and investigations` posts called `Executive Branch`.
+The other direction: 1 real `Executive Branch` posts called `Legal and investigations`.
+
+That's lopsided — the model leans toward `Executive Branch` on this pair.
+A direction like that usually points at your labelling rather than the
+model. Your agreement report is the thing that can tell you which.
+
+**Stability: lower spread is better; the limit is 0.10.**
+
+| Measure | Original spread | Latest spread | Latest verdict |
+|---|---|---|---|
+| Overall accuracy | 0.133 | 0.067 | MET |
+| Executive recall | 0.200 | 0.200 | MISSED |
+| Legal and invetigations recall | 0.300 | 0.100 | MET |
+| Foreign Policy recall | 0.154 | 0.077 | MET |
+| Elections recall | 0.083 | 0.083 | MET |
+
+Seed 42 improves across all measures, with errors falling from **8 to 5**. Seed 7 declines slightly; seed 2024 has mixed changes. Overall accuracy spread is halved. **Criteria 1–4 remain MET; criterion 5 remains MISSED** because Executive recall spread is **0.200**.
+
+### A second measured improvement - Confusion matrix improvement — seed 42 proves my assessment of increased rtaining and relabling both will help improve
+
+We see tha the epoch increase and relabling  of incorrect once helped improve the perfromance a big way. 
+
+Comparison of the  two confusion matrices; earlier achieved confusion matrix v/s the latest one after finetuning/hyperparameter tuning  
+**previous → latest**.
+
+| Actual label | Correct predictions | Errors | Recall / overall accuracy | Gain (percentage points) |
+|---|---|---|---|---|
+| Executive Branch | 4/10 → 9/10 | 6 → 1 | 40.0% → 90.0% | +50.0 |
+| Legal and investigations | 1/10 → 7/10 | 9 → 3 | 10.0% → 70.0% | +60.0 |
+| Foreign Policy | 12/13 → 12/13 | 1 → 1 | 92.3% → 92.3% | +0.0 |
+| Elections | 12/12 → 12/12 | 0 → 0 | 100.0% → 100.0% | +0.0 |
+| **Overall (accuracy)** | **29/45 → 40/45** | **16 → 5** | **64.4% → 88.9%** | **+24.4** |
+
+The latest run correctly classifies **11 more posts**: five more Executive and six more Legal posts. Errors fall from **16 to 5**, a **68.8% reduction**. Foreign Policy and Elections recall remain unchanged.
+
+### Stretch Feature- A confidence Check
+
+### Confidence report — seed 42
+
+Confidence is the probability assigned to the predicted label. The 45 test posts are ranked by confidence; the highest and lowest groups each contain 15 posts.
+
+| Prediction group | Correct predictions | Accuracy |
+| :--- | :--- | :--- |
+| Most confident third | 15/15 | 100.0% |
+| Least confident third | 13/15 | 86.7% |
+
+| Prediction outcome | Mean confidence |
+| :--- | :--- |
+| Correct | 86.7% |
+| Incorrect | 61.1% |
+
+The most confident third is **13.3 percentage points more accurate** than the least confident third on this test set.
 
 ---
 
 ## What's Still Broken
 
 <!-- For each criterion still missed: what you'd do, and why you stopped. -->
+Executing Recall is below what I wanted (target was 0.1) but i had 0.2. I still feel there is lot of overlap and we could potentially use a 2nd classifier (like XGboost which will be a weak learner to be applied based on prbabaility score gap) 
 
+We could add more data for executive branch and Legal and investigations but it will not solve the decision boundary problem as the two areas are so inter mingled. The result will improve if I add data but it will still misclassify few cases and onely way to improve is to add a 2nd classifier lie a XGboost type week learner decision classifier which will only be used where the proabability score of Executive decision branch prediction and  Legal and investigation class is less than the minimum allowed probability threshold/
 
+The reason I stopped is that our target was to use theis Bert based classifier and train and this will fail the objectyive if I write another decision tree based classifier.
 
-**The gap between what I meant my labels to capture and what the model
-learned:**
 <!-- Two sentences. Your confusion matrix is the evidence. -->
 
+## Latest Criteria vs Performance
+
+| Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
+|---|---|---|---|---|---|
+| 1. Overall accuracy | ≥ 0.650 in every seed | 0.889 (40/45) | 0.933 (42/45) | 0.867 (39/45) | MET |
+| 2. Macro F1 | ≥ 0.650 in every seed | 0.880 | 0.929 | 0.855 | MET |
+| 3. F1 for every label | ≥ 0.70 / 0.60 / 0.60 / 0.55 in every seed | 0.783 / 0.778 / 0.960 / 1.000 | 0.909 / 0.889 / 0.963 / 0.957 | 0.800 / 0.737 / 0.960 / 0.923 | MET |
+| 4. Pooled recall: Legal, Foreign Policy, Elections | ≥ 0.600 in every seed | 0.886 (31/35) | 0.914 (32/35) | 0.886 (31/35) | MET |
+| 5. Accuracy stability | Spread ≤ 0.10 overall and per class | Recall: 0.900 / 0.700 / 0.923 / 1.000 | Recall: 1.000 / 0.800 / 1.000 / 0.917 | Recall: 0.800 / 0.700 / 0.923 / 1.000 | MISSED |
+
+
+Criterion 5 is MISSED:There were two part to w it:
+    part1 - **Overall spread less than 0.1**  ..Met as the result was **0.067**
+    part2 - Did not meet per class spread of les or equal to 0.1 and I had **0.200 / 0.100 / 0.077 / 0.083** per class; only Executive exceeds the limit(0.2 instead of less than or equal to 0.1).
 
 
 <!-- ═════════════════════════════════════════════════════════════════════

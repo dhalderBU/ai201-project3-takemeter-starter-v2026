@@ -1,0 +1,209 @@
+[
+  {
+    "seed": 42,
+    "n_test": 45,
+    "accuracy": 0.8888888888888888,
+    "f1_macro": 0.8800966183574879,
+    "per_label": {
+      "Executive Branch": {
+        "precision": 0.6923076923076923,
+        "recall": 0.9,
+        "f1": 0.782608695652174,
+        "support": 10
+      },
+      "Legal and investigations": {
+        "precision": 0.875,
+        "recall": 0.7,
+        "f1": 0.7777777777777778,
+        "support": 10
+      },
+      "Foreign Policy": {
+        "precision": 1.0,
+        "recall": 0.9230769230769231,
+        "f1": 0.96,
+        "support": 13
+      },
+      "Elections": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0,
+        "support": 12
+      }
+    },
+    "confusion": {
+      "Executive Branch": {
+        "Executive Branch": 9,
+        "Legal and investigations": 1,
+        "Foreign Policy": 0,
+        "Elections": 0
+      },
+      "Legal and investigations": {
+        "Executive Branch": 3,
+        "Legal and investigations": 7,
+        "Foreign Policy": 0,
+        "Elections": 0
+      },
+      "Foreign Policy": {
+        "Executive Branch": 1,
+        "Legal and investigations": 0,
+        "Foreign Policy": 12,
+        "Elections": 0
+      },
+      "Elections": {
+        "Executive Branch": 0,
+        "Legal and investigations": 0,
+        "Foreign Policy": 0,
+        "Elections": 12
+      }
+    },
+    "confidence": {
+      "mean_when_right": 0.948739230632782,
+      "mean_when_wrong": 0.6302985548973083,
+      "accuracy_most_confident_third": 1.0,
+      "accuracy_least_confident_third": 0.6666666666666666,
+      "n_per_third": 15
+    },
+    "device": "mps",
+    "device_name": "Apple Silicon GPU (MPS)",
+    "torch_version": "2.15.0",
+    "max_length": 128
+  },
+  {
+    "seed": 7,
+    "n_test": 45,
+    "accuracy": 0.9333333333333333,
+    "f1_macro": 0.929366125018299,
+    "per_label": {
+      "Executive Branch": {
+        "precision": 0.8333333333333334,
+        "recall": 1.0,
+        "f1": 0.9090909090909091,
+        "support": 10
+      },
+      "Legal and investigations": {
+        "precision": 1.0,
+        "recall": 0.8,
+        "f1": 0.8888888888888888,
+        "support": 10
+      },
+      "Foreign Policy": {
+        "precision": 0.9285714285714286,
+        "recall": 1.0,
+        "f1": 0.9629629629629629,
+        "support": 13
+      },
+      "Elections": {
+        "precision": 1.0,
+        "recall": 0.9166666666666666,
+        "f1": 0.9565217391304348,
+        "support": 12
+      }
+    },
+    "confusion": {
+      "Executive Branch": {
+        "Executive Branch": 10,
+        "Legal and investigations": 0,
+        "Foreign Policy": 0,
+        "Elections": 0
+      },
+      "Legal and investigations": {
+        "Executive Branch": 1,
+        "Legal and investigations": 8,
+        "Foreign Policy": 1,
+        "Elections": 0
+      },
+      "Foreign Policy": {
+        "Executive Branch": 0,
+        "Legal and investigations": 0,
+        "Foreign Policy": 13,
+        "Elections": 0
+      },
+      "Elections": {
+        "Executive Branch": 1,
+        "Legal and investigations": 0,
+        "Foreign Policy": 0,
+        "Elections": 11
+      }
+    },
+    "confidence": {
+      "mean_when_right": 0.8736799955368042,
+      "mean_when_wrong": 0.5241402983665466,
+      "accuracy_most_confident_third": 1.0,
+      "accuracy_least_confident_third": 0.8,
+      "n_per_third": 15
+    },
+    "device": "mps",
+    "device_name": "Apple Silicon GPU (MPS)",
+    "torch_version": "2.15.0",
+    "max_length": 128
+  },
+  {
+    "seed": 2024,
+    "n_test": 45,
+    "accuracy": 0.8666666666666667,
+    "f1_macro": 0.8549797570850202,
+    "per_label": {
+      "Executive Branch": {
+        "precision": 0.8,
+        "recall": 0.8,
+        "f1": 0.8,
+        "support": 10
+      },
+      "Legal and investigations": {
+        "precision": 0.7777777777777778,
+        "recall": 0.7,
+        "f1": 0.7368421052631579,
+        "support": 10
+      },
+      "Foreign Policy": {
+        "precision": 1.0,
+        "recall": 0.9230769230769231,
+        "f1": 0.96,
+        "support": 13
+      },
+      "Elections": {
+        "precision": 0.8571428571428571,
+        "recall": 1.0,
+        "f1": 0.9230769230769231,
+        "support": 12
+      }
+    },
+    "confusion": {
+      "Executive Branch": {
+        "Executive Branch": 8,
+        "Legal and investigations": 1,
+        "Foreign Policy": 0,
+        "Elections": 1
+      },
+      "Legal and investigations": {
+        "Executive Branch": 2,
+        "Legal and investigations": 7,
+        "Foreign Policy": 0,
+        "Elections": 1
+      },
+      "Foreign Policy": {
+        "Executive Branch": 0,
+        "Legal and investigations": 1,
+        "Foreign Policy": 12,
+        "Elections": 0
+      },
+      "Elections": {
+        "Executive Branch": 0,
+        "Legal and investigations": 0,
+        "Foreign Policy": 0,
+        "Elections": 12
+      }
+    },
+    "confidence": {
+      "mean_when_right": 0.9476072788238525,
+      "mean_when_wrong": 0.8410844206809998,
+      "accuracy_most_confident_third": 1.0,
+      "accuracy_least_confident_third": 0.7333333333333333,
+      "n_per_third": 15
+    },
+    "device": "mps",
+    "device_name": "Apple Silicon GPU (MPS)",
+    "torch_version": "2.15.0",
+    "max_length": 128
+  }
+]
