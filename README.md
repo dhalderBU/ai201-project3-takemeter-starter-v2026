@@ -65,9 +65,16 @@ I plan to use four categories.
 
 **What Changed in dataset:  labels.csv when I started working on Unit 6 I found misclassification and realized my labeling was not correct. I went through all the labels and changed lables based ont he definitions so as the classification improves and the training dataset is good quality**
 
+<!--Definitions of the class were not performing well so tweaked it little base don guidance from gemini --> 
+
 ### `Executive Branch`
 
-**Definition:** Posts primarily about presidential or executive agency powers, appointments, administration, policy actions, presidential wrongdoing, presidential statements, presidential actions including justice department and FBI.
+<!-- old value below 
+
+**Definition:** Posts primarily about presidential or executive agency powers, appointments, administration, policy actions, presidential wrongdoing, presidential statements, presidential actions including justice department and FBI.  -->
+
+<!-- Updated  value below -->
+**Definition:** About the executive branch of government, presidential powers and duties, executive orders, cabinet appointments, federal agency administration, or implementing government policy
 
 **Example 1:** (record 10)
 
@@ -79,7 +86,13 @@ I plan to use four categories.
 
 ### `Legal and investigations`
 
-**Definition:** Posts primarily about courts, investigations, alleged wrongdoing, legal proceedings, or whether a specific action violates the law.
+<!-- old value below 
+
+****Definition:** Posts primarily about courts, investigations, alleged wrongdoing, legal proceedings, or whether a specific action violates the law.  -->
+
+<!-- Updated  value below -->
+
+**Definition:** About legal issues and investigations, courts, lawsuits, constitutional interpretation, criminal allegations, prosecution, impeachment proceedings, or whether a specific action violates the law
 
 **Example 1:** (record 80)
 
@@ -90,8 +103,13 @@ I plan to use four categories.
 > What is the legal interpretation of the SCOTUS' refusal to grant cert to an appeal?
 
 ### `Foreign Policy`
+<!-- old value below 
 
-**Definition:** Posts primarily about international relations, diplomacy, sanctions, treaties, military conflict, or relations between countries.
+****Definition:** Posts primarily about international relations, diplomacy, sanctions, treaties, military conflict, or relations between countries.  -->
+
+<!-- Updated  value below -->
+
+**Definition:** About foreign policy and international affairs, diplomacy, relations between countries, treaties, sanctions, military conflict, alliances, or international security
 
 **Example 1:** (record 161)
 
@@ -102,8 +120,14 @@ I plan to use four categories.
 > What incentives and new sanctions does Iran face given US withdrawal from the 'Iran Deal?'
 
 ### `Elections`
+<!-- old value below 
 
-**Definition:** Posts primarily about voting, campaigns, candidates, polling, election results, or electoral systems and procedures.
+****Definition:** Posts primarily about voting, campaigns, candidates, polling, election results, or electoral systems and procedures.  -->
+
+<!-- Updated  value below -->
+
+
+**Definition:** About elections, voting, voter turnout, political campaigns, candidates, polling, ballots, electoral systems, or election results
 
 **Example 1:** (record 189)
 
@@ -350,7 +374,32 @@ In the earlier section when i discussed dataset I already covered how I augemten
      Don't fill these in during unit 5.
      ═══════════════════════════════════════════════════════════════════ -->
 
+<!-- My original perfromance with definition was worse that without any definition and then i changed the definition. I have updated before and after in teh taxonomy section -->
+
 ---
+
+**Perfromance of classification of baseline without definition :**
+| Measure | Baseline |
+|---|---|
+| Overall accuracy | 0.778 |
+| Macro F1 | 0.761 |
+| F1 — `Elections` | 0.957 |
+| F1 — `Executive Branch` | 0.625 |
+| F1 — `Foreign Policy` | 0.828 |
+| F1 — `Legal and investigations` | 0.636 |
+
+**Perfromance of baseline model with definition in label_definitions.txt :**
+| Measure | Baseline |
+|---|---|
+| Overall accuracy | 0.844 |
+| Macro F1 | 0.833 |
+| F1 — `Elections` | 0.957 |
+| F1 — `Executive Branch` | 0.842 |
+| F1 — `Foreign Policy` | 0.867 |
+| F1 — `Legal and investigations` | 0.667 |
+
+Adding definitions improved overall accuracy from 77.8% to 84.4% and Macro F1 from 0.761 to 0.833. The largest gain was in Executive Branch F1 (0.625 → 0.842), while Elections remained unchanged. Foreign Policy and Legal and investigations improved modestly, though the latter remains the weakest category.
+
 
 ## Baseline vs. Trained
 
@@ -359,20 +408,26 @@ In the earlier section when i discussed dataset I already covered how I augemten
 
 | Measure | Baseline | Trained | Difference |
 |---|---|---|---|
-| Overall accuracy |  |  |  |
-| Macro F1 |  |  |  |
-| F1 — `label_one` |  |  |  |
-| F1 — `label_two` |  |  |  |
+| Overall accuracy | 0.844 | 0.644 | -0.200 |
+| Macro F1 | 0.833 | 0.555 | -0.278 |
+| F1 — `Elections` | 0.957 | 0.857 | -0.099 |
+| F1 — `Executive Branch` | 0.842 | 0.421 | -0.421 |
+| F1 — `Foreign Policy` | 0.867 | 0.774 | -0.092 |
+| F1 — `Legal and investigations` | 0.667 | 0.167 | -0.500 |
 
 **What I predicted before I looked:**
 <!-- Milestone 1 asks you to write this BEFORE seeing the trained numbers. A
      prediction made afterwards isn't one. -->
+     The Executive Branch and Legal and Investigations will have difficulty in classifying as there is overlap
+     Once I do do minimal training the perfromance of the trained with 3 epoch could be improved  compared to baseline but based on my earlier experience it take multiple epochs to do fine tuning to get better results as the generic models may take time to optimize the weights so higher rounds of epochs will most likely help 
 
 **What the gap actually means:**
 <!-- If the baseline matched your trained model, your fine-tuning added
      nothing — and that is a real finding, not a failure. Say it plainly. -->
+     With 3 epoch of training the overall performance of classification went down, the trained model underperformed the baseline: accuracy fell from 84.4% to 64.4%, and Macro F1 dropped from 0.833 to 0.555. F1 declined across all categories, with the largest losses in Legal and investigations (0.667 → 0.167) and Executive Branch (0.842 → 0.421), indicating that basic 3 epoch training reduced performance on this evaluation set. 
+     I have previously seen this when I train couple of layers of any LLM we need to train with good amount of data and multiple rounds before the weights in the  final layer gets to value which helps the outcome. I feel training with multiple epochs and fintunning using hyperprameter tuning may help.
 
-
+**I had a feeling it will be similar or slightly worse but it became worse on all the classes and overall accuracy too**
 
 ---
 

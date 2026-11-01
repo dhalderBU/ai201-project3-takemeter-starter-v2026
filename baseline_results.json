@@ -6,31 +6,31 @@
   "used_definitions": true,
   "scores": {
     "n": 45,
-    "accuracy": 0.6222222222222222,
-    "f1_macro": 0.5994698284171969,
+    "accuracy": 0.8444444444444444,
+    "f1_macro": 0.8329900839054156,
     "per_label": {
       "Elections": {
-        "precision": 0.6111111111111112,
+        "precision": 1.0,
         "recall": 0.9166666666666666,
-        "f1": 0.7333333333333334,
+        "f1": 0.9565217391304348,
         "support": 12
       },
       "Executive Branch": {
-        "precision": 1.0,
-        "recall": 0.3,
-        "f1": 0.4615384615384615,
+        "precision": 0.8888888888888888,
+        "recall": 0.8,
+        "f1": 0.8421052631578948,
         "support": 10
       },
       "Foreign Policy": {
-        "precision": 1.0,
-        "recall": 0.46153846153846156,
-        "f1": 0.631578947368421,
+        "precision": 0.7647058823529411,
+        "recall": 1.0,
+        "f1": 0.8666666666666666,
         "support": 13
       },
       "Legal and investigations": {
-        "precision": 0.4444444444444444,
-        "recall": 0.8,
-        "f1": 0.5714285714285714,
+        "precision": 0.75,
+        "recall": 0.6,
+        "f1": 0.6666666666666665,
         "support": 10
       }
     }
@@ -54,12 +54,12 @@
     {
       "text": "Donna Brazile said the DNC\u2019s joint fundraising agreement with Hillary\u2019s campaign wasn\u2019t illegal. Does this hold water? How does US law regulate political parties anyway?",
       "gold": "Legal and investigations",
-      "predicted": "Elections"
+      "predicted": "Legal and investigations"
     },
     {
       "text": "What are the process and limits of the presidential pardon in light of Michael Flynn's lawyer stating it is \"An under-utilized tool of political power.\"",
       "gold": "Executive Branch",
-      "predicted": "Legal and investigations"
+      "predicted": "Executive Branch"
     },
     {
       "text": "What are the consequences of the recent Italian election and the causes of the change in electoral makeup?",
@@ -109,12 +109,12 @@
     {
       "text": "What are the pros and cons of running the Executive Branch like a corporation?",
       "gold": "Executive Branch",
-      "predicted": "Elections"
+      "predicted": "Executive Branch"
     },
     {
       "text": "Is the designation of the Iranian Islamic Revolutionary Guard as a terrorist organization an accurate characterization and what is the intended outcome of designating it as such?",
       "gold": "Foreign Policy",
-      "predicted": "Legal and investigations"
+      "predicted": "Foreign Policy"
     },
     {
       "text": "McConnell says if Trump wins the nomination they will \"drop him like a hot rock,\" running negative ads to separate Trump from the Congressmen up for re-election. Would Trump stand a chance in the general if the Republican establishment essentially campaigns against him?",
@@ -144,7 +144,7 @@
     {
       "text": "Why are so many people from places like Central America seeking asylum in the US and how does US law apply to the waves of migrants currently trying to enter the country?",
       "gold": "Legal and investigations",
-      "predicted": "Legal and investigations"
+      "predicted": "Foreign Policy"
     },
     {
       "text": "How do early voting periods vary across states?",
@@ -159,17 +159,17 @@
     {
       "text": "What happens when the Secret Service runs out of money?",
       "gold": "Executive Branch",
-      "predicted": "Elections"
+      "predicted": "Executive Branch"
     },
     {
       "text": "Sajid Javid defends deportation of grooming gang members",
       "gold": "Legal and investigations",
-      "predicted": "Legal and investigations"
+      "predicted": "Foreign Policy"
     },
     {
       "text": "How much is Trump financially benefiting from this vacations?",
       "gold": "Executive Branch",
-      "predicted": "Legal and investigations"
+      "predicted": "Executive Branch"
     },
     {
       "text": "Robert Mueller has been appointed a special counsel for the Russia probe. What is that and how does it work?",
@@ -184,22 +184,22 @@
     {
       "text": "What could a Vice President theoretically do in their capacity as \u201cPresident of the Senate?\u201d",
       "gold": "Executive Branch",
-      "predicted": "Elections"
+      "predicted": "Foreign Policy"
     },
     {
       "text": "After President Trump\u2019s trip to Europe German Chancellor Angela Merkel said \"The times in which we could rely fully on others \u2014 they are somewhat over.\u201d Does this statement have precedent?",
       "gold": "Foreign Policy",
-      "predicted": "Legal and investigations"
+      "predicted": "Foreign Policy"
     },
     {
       "text": "What happens when a country withdraws from the World Health Organization or a similar international body?",
       "gold": "Foreign Policy",
-      "predicted": "Elections"
+      "predicted": "Foreign Policy"
     },
     {
       "text": "Could a wealthy enough President just pay for large public work initiatives by him/herself?",
       "gold": "Executive Branch",
-      "predicted": "Elections"
+      "predicted": "Executive Branch"
     },
     {
       "text": "Has the war in Afghanistan been a success, a failure, or otherwise, and why?",
@@ -209,7 +209,7 @@
     {
       "text": "What was the legal authority for the US attack on Syria?",
       "gold": "Foreign Policy",
-      "predicted": "Legal and investigations"
+      "predicted": "Foreign Policy"
     },
     {
       "text": "What led to the breakdown of arms control agreements between the US and Russia?",
@@ -234,7 +234,7 @@
     {
       "text": "In Trump v. Hawaii (travel ban), the Supreme Court ruled the President's past statements should not be considered when reviewing that directive. Does this mean statements counter to Trump's Emergency Declaration, like \"I didn\u2019t need to do this,\" won't be considered in upcoming litigation?",
       "gold": "Legal and investigations",
-      "predicted": "Legal and investigations"
+      "predicted": "Executive Branch"
     },
     {
       "text": "Did AG Jeff Sessions commit perjury during his confirmation hearing when he didn\u2019t disclose prior meetings with the Russian Ambassador?",
@@ -244,22 +244,22 @@
     {
       "text": "What does it mean when the US recognizes a disputed territory as part of another country?",
       "gold": "Foreign Policy",
-      "predicted": "Legal and investigations"
+      "predicted": "Foreign Policy"
     },
     {
       "text": "How does the US respond when another country detains an American citizen abroad?",
       "gold": "Foreign Policy",
-      "predicted": "Legal and investigations"
+      "predicted": "Foreign Policy"
     },
     {
       "text": "Congress has overridden Obama's veto on the 'Saudi Sept 11' bill. What are the consequences of this?",
       "gold": "Foreign Policy",
-      "predicted": "Legal and investigations"
+      "predicted": "Foreign Policy"
     },
     {
       "text": "Do states typically have to guard supplies from the federal government? What is being done with the seized supplies?",
       "gold": "Legal and investigations",
-      "predicted": "Elections"
+      "predicted": "Foreign Policy"
     }
   ]
 }

@@ -9,7 +9,7 @@
 #hot_take: a confident claim with no support offered
 #reaction: an immediate response to something that just happened
 
-Elections: "Posts about voting, campaigns, candidates, polling, election results, debates or electoral systems and election procedures."
-Executive Branch: "Posts primarily about presidential or executive agency powers, appointments, administration, policy actions, presidential wrongdoing, presidential statements, presidential actions including justice department and FBI"
-Legal and investigations: "Posts about courts, judges, criminal or special-counsel investigations, indictments, perjury, impeachment, alleged wrongdoing,legal proceedings, immigration, and other questions of legality and violation of law."
-Foreign Policy: "Posts primarily about international relations, diplomacy, sanctions, treaties, military conflict, or relations between countries."
+Elections: About elections, voting, voter turnout, political campaigns, candidates, polling, ballots, electoral systems, or election results
+Executive Branch: About the executive branch of government, presidential powers and duties, executive orders, cabinet appointments, federal agency administration, or implementing government policy
+Legal and investigations: About legal issues and investigations, courts, lawsuits, constitutional interpretation, criminal allegations, prosecution, impeachment proceedings, or whether a specific action violates the law
+Foreign Policy: About foreign policy and international affairs, diplomacy, relations between countries, treaties, sanctions, military conflict, alliances, or international security
