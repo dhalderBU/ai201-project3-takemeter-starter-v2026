@@ -1,46 +1,46 @@
 {
   "seed": 42,
-  "n_test": 53,
-  "accuracy": 0.8301886792452831,
-  "f1_macro": 0.8373996655518394,
+  "n_test": 45,
+  "accuracy": 0.6444444444444445,
+  "f1_macro": 0.554763925943892,
   "per_label": {
     "Executive Branch": {
-      "precision": 0.7058823529411765,
-      "recall": 0.8,
-      "f1": 0.75,
-      "support": 15
+      "precision": 0.4444444444444444,
+      "recall": 0.4,
+      "f1": 0.42105263157894735,
+      "support": 10
     },
     "Legal and investigations": {
-      "precision": 0.75,
-      "recall": 0.6923076923076923,
-      "f1": 0.72,
-      "support": 13
+      "precision": 0.5,
+      "recall": 0.1,
+      "f1": 0.16666666666666666,
+      "support": 10
     },
     "Foreign Policy": {
-      "precision": 0.9230769230769231,
+      "precision": 0.6666666666666666,
       "recall": 0.9230769230769231,
-      "f1": 0.9230769230769231,
+      "f1": 0.7741935483870968,
       "support": 13
     },
     "Elections": {
-      "precision": 1.0,
-      "recall": 0.9166666666666666,
-      "f1": 0.9565217391304348,
+      "precision": 0.75,
+      "recall": 1.0,
+      "f1": 0.8571428571428571,
       "support": 12
     }
   },
   "confusion": {
     "Executive Branch": {
-      "Executive Branch": 12,
-      "Legal and investigations": 3,
-      "Foreign Policy": 0,
-      "Elections": 0
+      "Executive Branch": 4,
+      "Legal and investigations": 1,
+      "Foreign Policy": 2,
+      "Elections": 3
     },
     "Legal and investigations": {
-      "Executive Branch": 3,
-      "Legal and investigations": 9,
-      "Foreign Policy": 1,
-      "Elections": 0
+      "Executive Branch": 4,
+      "Legal and investigations": 1,
+      "Foreign Policy": 4,
+      "Elections": 1
     },
     "Foreign Policy": {
       "Executive Branch": 1,
@@ -49,21 +49,21 @@
       "Elections": 0
     },
     "Elections": {
-      "Executive Branch": 1,
+      "Executive Branch": 0,
       "Legal and investigations": 0,
       "Foreign Policy": 0,
-      "Elections": 11
+      "Elections": 12
     }
   },
   "confidence": {
-    "mean_when_right": 0.8182130455970764,
-    "mean_when_wrong": 0.6743142604827881,
-    "accuracy_most_confident_third": 1.0,
-    "accuracy_least_confident_third": 0.5882352941176471,
-    "n_per_third": 17
+    "mean_when_right": 0.2961879372596741,
+    "mean_when_wrong": 0.2721964120864868,
+    "accuracy_most_confident_third": 0.9333333333333333,
+    "accuracy_least_confident_third": 0.3333333333333333,
+    "n_per_third": 15
   },
   "device": "mps",
   "device_name": "Apple Silicon GPU (MPS)",
-  "torch_version": "2.6.0",
+  "torch_version": "2.15.0",
   "max_length": 128
 }

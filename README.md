@@ -41,27 +41,29 @@
 
 I have created my own datset and not used the dataset provided in the assignments (i.e. noteven augmented that dataset)
 
-In this project I am classifing public posts from Reddit's r/NeutralPolitics community by their main political topic. It assigns one of four labels: Executive Branch, Legal and Investigations, Foreign Policy, or Elections. I selected 200 posts from a Kaggle Reddit dataset, used Claude to assist with classification, and manually reviewed and corrected the labels as claude did not classify properly. The project tests whether a classifier can distinguish these topics, especially when executive officials are involved in legal or investigative questions. I didnot want to use the dataset already provided instead wanted to go through the process of generating dataset myself to understand how difficult it is to manually label it.
+In this project I am classifing public posts from Reddit's r/NeutralPolitics community by their main political topic. It assigns one of four labels: Executive Branch, Legal and investigations, Foreign Policy, or Elections. I selected 200 posts from a Kaggle Reddit dataset, used Claude to assist with classification, and manually reviewed and corrected the labels as claude did not classify properly. The project tests whether a classifier can distinguish these topics, especially when executive officials are involved in legal or investigative questions. I didnot want to use the dataset already provided instead wanted to go through the process of generating dataset myself to understand how difficult it is to manually label it.
 
 ## Stretch Feature 
 
-**Why fourth label** In my datset of neutral politics subreditt (original 1000 rows picked top three classes as identified by claude i.e. 3 of approx 10 classes) for a 200 row dataset as per the assignment. In this list original Redit the original class had 125 Executive branch , 35 Foreign policy and 40 Elections(3 label classes). I had a Smaller pool of 19 "Legal and Investigations". Inorder to understand the categories  I asked claude to do the inital lable and that give me an apprximate distribution of label count for the different categories and I selected the top 3 as indicated earlier. I  then noticed Claude had mislabled many of the "executive Branch" and "Legal and Investigation class" . I saw legal and Elections also having some misclassifications. So my thought process was that if I include legal and investigations and reduce the Executive branch a bit that will improve the imballance but leave the difficult classification  problem still there which would help me learn the nuances.
+**Why fourth label** In my dataset of `neutral politics` subreditt (originally contained 1000 posts with approx 9 classes but three of them nearly totalled less than 200) so I decided to add 4th class which will make it 200 and I will also have imabllanced. Using claude on this original Reditt post i recd 125 Executive branch , 35 Foreign policy and 40 Elections(3 label classes). I had a Smaller pool of 19 "Legal and Investigations". Inorder to understand the categories. I  then noticed Claude had mislabled many of the "executive Branch" and "Legal and Investigation class" . I saw legal and Elections also having some misclassifications by Claude. So my thought process was that I should manually lable it and then decide where I should add 50 more so i will have problems in classifying which will help me learn the nuances.
 
-So I took the legal and investigations and merged immigration related data and identified misclasified by Claude rows(ie showing as "Executive Branch" but actually legal and investigations) and created a good class for investigations and thus created the fourth class. 
+When I relabled it the 2nd time I got - Elections -77 , Executive Branch-68 , Legal and investigations- 68 , Foreign Policy-37. So I took 50 synthetic posts(manually verfiedf and relabled) generatd by gemini an added 50 for Foreign Policy there by creating a set of 300 lables and improving the class imballance as a side effect. 
 
 ## Stretch Feature - 50 extra examples for the thinnest label
 **My Thought process and execution strategy**
-My intent was that his will be difficult dayaset and that will help me learn the nuances of calssification model hypertuning. I got good result and all within criteria baring one calls i.e legal and investigation which was higher than what I wanted. So I decided to augment the dataset.
 
-Since I was not abel to connect to Reddit and pull data and I had exhausted the dataset from Kaggel  so I had to take helpo from Claude and asked it to look into my datset and create synthetic data for three lables  for 50 each of "Legal and Investigations", Foreign Policy and Elections. All these synthtic data were add after the 200 th row of the originakl data.
+When I relabled it the 2nd time I got - Elections -77 , Executive Branch-68 , Legal and investigations- 68 , Foreign Policy-37. So I took 50 synthetic posts(manually verfiedf and relabled) generatd by gemini an added 50 for Foreign Policy there by creating a set of 300 lables and improving the class imballance as a side effect. 
 
-But I added one class at a time and  after every calss getting augment I executed the notebook to see the results and the "Legal and Investigatins" improved startight away , Then Iadded to the the smallest class  and then the next smallest. After all these were add I did one more round of execution and I saw that dataset class imbalance was redcuced an lot and was very acceptable. The accuracy hit what I was trying to across all my criteria.. The latest takemeter.ipynb has the modified code which uses hyper parameter optimization, checkpointing of model and increased epoch so we are able to train and then exit the model when the validation loss is the minimal thereby avoid overfitting. 
 
 ## Label Taxonomy
 
-The label names below match `data/reditt_labels.csv` after trimming surrounding whitespace; the CSV spells the legal category `Legal and investigations`. All examples are quoted directly from the file's `text` column. Record numbers count data records, excluding the header.
+The label names below match `./reditt_labels.csv` after trimming surrounding whitespace; the CSV spells the legal category `Legal and investigations`. All examples are quoted directly from the file's `text` column. Record numbers count data records, excluding the header.
 
 I plan to use four categories.
+
+<!-- ⚠️ WHAT CHANGED : labels.csv when I started working on Unit 6 I found misclassification and realized my labeling was not correct. I went through all the labels and changed lables base dont he definitions so as the classification improves and the training dataset is good quality. -->
+
+**What Changed in dataset:  labels.csv when I started working on Unit 6 I found misclassification and realized my labeling was not correct. I went through all the labels and changed lables based ont he definitions so as the classification improves and the training dataset is good quality**
 
 ### `Executive Branch`
 
@@ -69,21 +71,21 @@ I plan to use four categories.
 
 **Example 1:** (record 10)
 
-> Can the President forgive student debt?
+> Is the Special Government Employee carve-out in Executive Order 14158 standard practice for temporary federal organizations ?
 
-**Example 2:** (record 71)
+**Example 2:** (record 52)
 
 > Is the pace of President Trump's Cabinet appointments similar to those of previous administrations?
 
 ### `Legal and investigations`
 
-**Definition:** Posts about courts, judges, criminal or special-counsel investigations, indictments, perjury, impeachment, alleged wrongdoing,legal proceedings, immigration, and other questions of legality and violation of law.
+**Definition:** Posts primarily about courts, investigations, alleged wrongdoing, legal proceedings, or whether a specific action violates the law.
 
-**Example 1:** (record 121)
+**Example 1:** (record 80)
 
 > Robert Mueller has been appointed a special counsel for the Russia probe. What is that and how does it work?
 
-**Example 2:** (record 127)
+**Example 2:** (record 85)
 
 > What is the legal interpretation of the SCOTUS' refusal to grant cert to an appeal?
 
@@ -91,23 +93,23 @@ I plan to use four categories.
 
 **Definition:** Posts primarily about international relations, diplomacy, sanctions, treaties, military conflict, or relations between countries.
 
-**Example 1:** (record 148)
+**Example 1:** (record 161)
 
 > What are the implications of the US backing out of UNESCO?
 
-**Example 2:** (record 153)
+**Example 2:** (record 162)
 
 > What incentives and new sanctions does Iran face given US withdrawal from the 'Iran Deal?'
 
 ### `Elections`
 
-**Definition:** Posts about voting, campaigns, candidates, polling, election results, debates or electoral systems and election procedures.
+**Definition:** Posts primarily about voting, campaigns, candidates, polling, election results, or electoral systems and procedures.
 
-**Example 1:** (record 175)
+**Example 1:** (record 189)
 
 > What are the advantages and disadvantages of unconditionally allowing people to vote by mail?
 
-**Example 2:** (record 189)
+**Example 2:** (record 185)
 
 > What are the arguments for and against gerrymandering?
 
@@ -117,7 +119,7 @@ I plan to use four categories.
 
 **The decision rule:** Classify the main question being asked. General questions about executive authority, appointments, administration, or policy belong in `Executive Branch`. Questions centered on an investigation, court proceeding, alleged wrongdoing, or a specific violation of law belong in `Legal and investigations`, even when they name the president, the Justice Department, or the FBI. A person's name or an agency's place in government does not decide the label by itself.
 
-**Consistency limit:** This is the intended boundary rule. The current labels do not apply it perfectly: the Jeff Sessions perjury question in record 1 is labeled `Executive Branch`, although its central question concerns alleged wrongdoing. This is a labeling inconsistency to review separately from the model's prediction errors.
+**Consistency limit:** This is the intended boundary rule. The current labels do not apply it perfectly:"Did AG Jeff Sessions commit perjury during his confirmation hearing when he didn’t disclose prior meetings with the Russian Ambassador?" labeled as `Legal and investigations`, although its central question concerns alleged wrongdoing but depending on other items being trained on this could be classified as `Executive Branch`. This is a very tricky statement due to the type of post.
 
 In my manual review, Elections and Foreign Policy generally felt clearer to categorize. I expect confusion in both directions between Executive Branch and Legal and Investigations because their subjects overlap.
 
@@ -125,7 +127,7 @@ In my manual review, Elections and Foreign Policy generally felt clearer to cate
 
 ## The Dataset
 
-**Where the posts came from:** Public r/NeutralPolitics posts obtained through a Kaggle Reddit dataset. The selected 200-record dataset used for the examples and counts here is [reditt_labels.csv](data/reditt_labels.csv).
+**Where the posts came from:** Public r/NeutralPolitics posts obtained through a Kaggle Reddit dataset. The selected 200-record dataset used for the examples and counts here is in the location `./labels.csv`
 
 **How I labelled them:** I selected the four topic categories and assigned labels, also had Claude classify the posts, and then manually reviewed and corrected the labels. This was an AI-assisted labeling process with human review.
 
@@ -147,27 +149,52 @@ The file contains three columns:
 
 Executive Branch represents nearly half the dataset, so I expect the additional examples may help the model learn that category. Legal and Investigations accounts for 19.5%, while Elections is the smallest category at 15.5%. With only 200 posts across four classes, the smaller categories have limited examples in each split, and performance may vary with the split and random seed. These are expectations to test with per-class metrics and a confusion matrix.
 
+<!-- ⚠️ WHAT CHANGED : labels.csv when I started working on Unit 6 I found misclassification and realized my labeling was not correct. I went through all the labels and changed lables base dont he definitions so as the classification improves and the training dataset is good quality. The subreditt gave me 200 records I added another 50 synthetic data collecting through gemini and added at the end so as I have foreign policy as a small dataset and total records is 250 instead of 200.   -->
+
+**Counts per label after relabling but before dding more data to Foreign Policy label class:** 
+
+| Label | Count | Share |
+|---|---:|---:|
+| Executive Branch | 68 | 27.2% |
+| Legal and investigations | 68 | 27.2% |
+| Foreign Policy | 37 | 14.8% |
+| Elections | 77 | 30.8% |
+| **Total** | **250** | **100.0%** |
+
+**Counts per label after relabling and adding more data to Foreign Policy class:** 
+
+
+| Label | Count | Share |
+|---|---:|---:|
+| Executive Branch | 68 | 22.7% |
+| Legal and investigations | 68 | 22.7% |
+| Foreign Policy | 87 | 29.0% |
+| Elections | 77 | 25.7% |
+| **Total** | **300** | **100.0%** |
+
+Now we see foreign policy class is better ballance previously it was 14.8% and now it is 29% while others are between 22 and 27% so if wwe train properly we should be able to get much better classification results
+
 **Three hard cases**
 
-All three posts have misclassification notes in [reditt_labels.csv](data/reditt_labels.csv). The first two are labeled `Executive Branch`, and the third is labeled `Legal and investigations`. The explanations below use the reasoning recorded in those notes.
+All three posts have misclassification notes in './labels.csv'. 
 
-**1. Jeff Sessions and the Russian Ambassador — record 1**
+**1. Jeff Sessions and the Russian Ambassador — record 89**
 
 > *The post:* Did AG Jeff Sessions commit perjury during his confirmation hearing when he didn’t disclose prior meetings with the Russian Ambassador?
 >
-> *Could have been:* `Executive Branch` or `Foreign Policy`.
+> *Could have been:* `Legal and investigations` or `Foreign Policy`.
 >
-> *I chose, because:* `Executive Branch`. I kept the label for the question about the Attorney General's conduct during his confirmation hearing. My note flags the reference to another country: mentioning the Russian Ambassador could cause a classifier to select Foreign Policy.
+> *I chose, because:* `Executive Branch`. I kept the label for the question about the Attorney General's conduct during his confirmation hearing and legal implications of lying under oath. My note flags the reference to another country: mentioning the Russian Ambassador could cause a classifier to select Foreign Policy.
 
-**2. The Fed injecting money into the economy — record 31**
+**2. Legal consequences can a sitting POTUS  — record 82**
 
-> *The post:* How Can the Fed Inject $1.5 Trillion Into the Economy?
+> *The post:* What legal consequences can a sitting POTUS be subject to if s/he engages in slander or libel??
 >
-> *Could have been:* `Executive Branch` or `Economy`, if Economy is added as a future category. Economy is not one of the current four labels.
+> *Could have been:* `Executive Branch` or `Legal and investigations`, Since POTUS is mentioned it could get classified to Executive Branch.
 >
-> *I chose, because:* `Executive Branch`. My note groups the Fed's action under this category and flags the economic subject matter as a possible source of confusion if an Economy label is added. This describes the category assigned in my dataset and a potential future boundary.
+> *I chose, because:* `Legal and investigations` is aligned with "The core subject is legal liability " as noted in the notes in labels.csv.
 
-**3. Donald Trump Jr.'s emails — record 98**
+**3. Donald Trump Jr.'s emails — record 123**
 
 > *The post:* Do the recently released emails relating to Donald Trump Jr. indicate any criminal wrongdoing?
 >
@@ -193,29 +220,26 @@ BATCH_SIZE = 16
 
 **Anything I changed from the defaults, and why:**
 
-I didnt change it as a part of Unit 5 though I did test few beyind this as defualt is not giving me good result but I will show the results in Unit 6
+I didnt change it as a part of Unit 5 though I did test few beyind this as default is not giving me good result but I will show the results in Unit 6
 
-**Split sizes:** 139 training / 31 validation / 30 test posts, using a stratified split targeting approximately 70% / 15% / 15%.
+**Split sizes:** 210 training / 45 validation / 45 test posts, using a stratified 70% / 15% / 15% split of the 300-record dataset with seed 42, as recorded in `takemeter.ipynb`.
 
 | Label | Train | Validation | Test |
 |---|---:|---:|---:|
-| Executive Branch | 68 | 15 | 14 |
-| Legal and Investigations | 27 | 6 | 6 |
-| Foreign Policy | 23 | 5 | 5 |
-| Elections | 21 | 5 | 5 |
-| **Total** | **139** | **31** | **30** |
+| Executive Branch | 48 | 10 | 10 |
+| Legal and investigations | 48 | 10 | 10 |
+| Foreign Policy | 61 | 13 | 13 |
+| Elections | 53 | 12 | 12 |
+| **Total** | **210** | **45** | **45** |
 
-Legal and Investigations, Foreign Policy, and Elections each have **fewer than eight test examples**. With these small groups, even one additional misclassification can substantially change per-class metrics, contributing to variation across random seeds.
+Each category has **10–13 test examples**, so none has fewer than eight. These groups are still small: one additional error changes recall by about 7.7–10 percentage points, and per-class metrics may vary across random seeds.
 
 **What I changed to get better results (copied from takemeter.ipynb file) as a part of 2nd run**
-- Epoch changed to 25 as original value 3 was not doing enough training and making it to 25 with a auto skip with checkpointing once we have get the best validation loss gives us the best model performance  
-- Learning rate improved when I reduced and this is the best learning rate that I found after few iterations of tuning and testing the model performance on validation set.
-
+- in the takemeter.ipynb the training function I have modified to run larger epoch and avoid overfitting . It continues to train till the Validation error goes down till max epoch is exhausted (intend to use upto 25) . While doing this it checkpoints the model so as it can revert back to the best performing model (it stops at the point where the validation error is the lowest and the subsequent next two validation error is higher)    
+- I also tried using a lopwer learnign rate ie used 1e-5 but the overall perfromance did not improve but will use the lower parameter as that should give us better perfromance of model when epochs are higher.
 - EPOCHS = 25 .. it skipps as soon as we have got the best training results once the validation loss starts increasing
-- LEARNING_RATE = 8.8e-6 .. reduced so as the learing gets better without sacrificing training speed
+- LEARNING_RATE = 1e-5 .. reduced so as the learning gets better without sacrificing training speed
 - BATCH_SIZE = 16
-
-
 
 ---
 
@@ -286,38 +310,38 @@ I used claude ideas for inital class identification and then manually reviewed a
 
 **Results of Second training Run**
 
-The following results are from the saved outputs of Sections 6 and 7 in takemeter.ipynb, using the augmented 350-record dataset and 53 held-out test examples per seed. The three-seed results are also saved in results_three_seeds_before.json.
+The latest test metrics below come from the Section 5 evaluation in `takemeter.ipynb`, saved in [results.json](results.json), for seed 42 and 45 held-out posts. The separate Section 7 confusion matrix below is retained from the earlier 350-record experiment with 53 test posts.
 
-## Stretch Feature  - 2nd training Run
-#### Section 6 Results from takemeter.ipynb — Three-seed results
+## Stretch Feature — 2nd training run
 
-| Measure | Seed 42 | Seed 7 | Seed 2024 | Spread |
-|---|---|---|---|---|
-| Overall accuracy | 0.830 | 0.887 | 0.887 | 0.057 |
-| Macro F1 | 0.837 | 0.892 | 0.889 | 0.055 |
-| F1 — `Executive Branch` | 0.750 | 0.839 | 0.857 | 0.107 |
-| F1 — `Legal and investigations` | 0.720 | 0.857 | 0.880 | 0.160 |
-| F1 — `Foreign Policy` | 0.923 | 0.917 | 0.960 | 0.043 |
-| F1 — `Elections` | 0.957 | 0.957 | 0.857 | 0.099 |
+<!-- below values changed due to relabling-->
 
-**Average accuracy: 86.79%. Average macro F1: 0.8727.** These are the arithmetic means of the three per-seed scores. Spread is the maximum minus the minimum score; the accuracy spread is **5.66 percentage points** before rounding to the table's three decimal places. Legal and investigations has the largest per-class F1 spread, at **0.160**.
+#### Section 5 results from takemeter.ipynb — Latest single-seed run
 
-#### Section 7 Results from takemeter.ipynb — Confusion matrix (seed 42)
+| Measure | Seed 42 |
+|---|---:|
+| Overall accuracy | 0.644 |
+| Macro F1 | 0.555 |
+| F1 — `Executive Branch` | 0.421 |
+| F1 — `Legal and investigations` | 0.167 |
+| F1 — `Foreign Policy` | 0.774 |
+| F1 — `Elections` | 0.857 |
 
-Section 7 displays the first seed's confusion matrix (`all_results[0]`, seed 42). Rows are the true labels and columns are the predictions.
+**Accuracy: 64.44%. Macro F1: 0.5548.** The model correctly classified **29 of 45** test posts. Elections has the highest per-class F1 (**0.857**), and Legal and investigations has the lowest (**0.167**). The latest `results.json` contains only seed 42, so cross-seed averages and spread cannot be calculated from this file.
+The overall results are ok but two classes ie "Executive Branch" an dthe "Legal and Investigations" needs to better and if we run high er number of epochs I am sure will give better reutls and we will do that in Unit 6
 
-| true \ predicted | Executive Branch | Legal and investigations | Foreign Policy | Elections |
-|---|---|---|---|---|
-| **Executive Branch** | 12 | 3 | 0 | 0 |
-| **Legal and investigations** | 3 | 9 | 1 | 0 |
-| **Foreign Policy** | 1 | 0 | 12 | 0 |
-| **Elections** | 1 | 0 | 0 | 11 |
 
-The largest off-diagonal count is **3**, occurring in both directions between Executive Branch and Legal and investigations: three Executive Branch posts were predicted as Legal and investigations, and three Legal and investigations posts were predicted as Executive Branch. This matrix contains **44 correct predictions out of 53**, giving seed 42 an accuracy of **83.02%**.
+<!-- Changed the stretch feature related information below. as I relabled manually and went through each row the distribution changed The Executive branch came down and "Legal and investigations" went up. The "Foreign policy" now had the lowest and and I had to autgment it by 50 more rows -->
 
 ## Stretch Feature 
-**50 extra examples for the thinnest label**
-In the earlier section when i discussed dataset I already covered how I augemtented the original 200 and in steps of 50 per class and perfromed various results. During this execrcise I also proved a better balanced dataset  (or where class imballance is not extreme) results get better assuming we ahve good number of rows of data per class(mine were between 80 and 98)
+
+<!-- old content -->
+50 extra examples for the thinnest label In the earlier section when i discussed dataset I already covered how I augemtented the original 200 and in steps of 50 per class and performed various results. During this execrcise I also proved a better balanced dataset (or where class imballance is not extreme) results get better assuming we ahve good number of rows of data per class(mine were between 80 and 98)
+
+<!-- updated content -->
+
+**50 extra examples for the thinnest label- Foreign policy**
+In the earlier section when i discussed dataset I already covered how I augemtented the original 200 from reditt and then added additional relabled additional data generated by gemini that gave me 250 rows  but we had sever class imbalance in foreign policy and I added 50 more synthetic data  from gemini  for the Foreign policy label/class thus making it total 300 rows.I still kept the original Executive branch and the "Legal and investigation class"
 
 <!-- ═══════════════════════ UNIT 6 — THE TEST ═══════════════════════
 
@@ -330,41 +354,24 @@ In the earlier section when i discussed dataset I already covered how I augemten
 
 <!-- Both models on the same posts. `python baseline.py --trained results.json`
      prints this table for you. -->
-**After the baseline run**
-
-| Measure | Baseline |
-|---|---|
-| Overall accuracy | 0.711 |
-| Macro F1 | 0.679 |
-| F1 — `Elections` | 0.923 |
-| F1 — `Executive Branch` | 0.476 |
-| F1 — `Foreign Policy` | 0.846 |
-| F1 — `Legal and investigations` | 0.471 |
-
-**After Baseline with trained results execution**
 
 | Measure | Baseline | Trained | Difference |
 |---|---|---|---|
-| Overall accuracy | 0.711 | 0.844 | +0.133 |
-| Macro F1 | 0.679 | 0.687 | +0.008 |
-| F1 — `Elections` | 0.923 | 0.957 | +0.033 |
-| F1 — `Executive Branch` | 0.476 | 0.833 | +0.357 |
-| F1 — `Foreign Policy` | 0.846 | 0.960 | +0.114 |
-| F1 — `Legal and investigations` | 0.471 | 0.000 | -0.471 |
-
+| Overall accuracy |  |  |  |
+| Macro F1 |  |  |  |
+| F1 — `label_one` |  |  |  |
+| F1 — `label_two` |  |  |  |
 
 **What I predicted before I looked:**
 <!-- Milestone 1 asks you to write this BEFORE seeing the trained numbers. A
      prediction made afterwards isn't one. -->
 
-My prediction is that both "Executive Branch" and "Legal and Investigations" class will will better F1 score after basic finetuning (with default value before any hyperpartamter changes).
-
 **What the gap actually means:**
 <!-- If the baseline matched your trained model, your fine-tuning added
      nothing — and that is a real finding, not a failure. Say it plainly. -->
 
-Finding : **It improved results for** "Executive branch"(0.357) and slightly improved the f1 score for "Foreign policy"(0.114) and very small amount for "Elections" (0.033)
-**what performed badly** "Legal and investigations" **(- 0.471)** so it seems Legal and investigations is getting wrongly classified to "Executive Branch". When I look into the data of Legal and investigations, many of the rows are legal and investigation against Executive Branch and english terms which are used boththe classes. Executive Branch had 98 record which is the highest of all still it did not do that great. So i may have to train more rounds (i.e. increase epochs) or we can add more rows of the class lable "Legal and investigations" (i.e improve trainin on legal class and improve class imbalance)  and then we can fine tune it too by using hyper parameter optimization
+
+
 ---
 
 ## Run Log — Before
