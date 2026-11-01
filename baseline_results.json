@@ -6,80 +6,45 @@
   "used_definitions": true,
   "scores": {
     "n": 45,
-    "accuracy": 0.7111111111111111,
-    "f1_macro": 0.6790023701788408,
+    "accuracy": 0.6222222222222222,
+    "f1_macro": 0.5994698284171969,
     "per_label": {
       "Elections": {
-        "precision": 0.8571428571428571,
-        "recall": 1.0,
-        "f1": 0.923076923076923,
+        "precision": 0.6111111111111112,
+        "recall": 0.9166666666666666,
+        "f1": 0.7333333333333334,
         "support": 12
       },
       "Executive Branch": {
-        "precision": 0.8333333333333334,
-        "recall": 0.3333333333333333,
-        "f1": 0.47619047619047616,
-        "support": 15
+        "precision": 1.0,
+        "recall": 0.3,
+        "f1": 0.4615384615384615,
+        "support": 10
       },
       "Foreign Policy": {
-        "precision": 0.7857142857142857,
-        "recall": 0.9166666666666666,
-        "f1": 0.8461538461538461,
-        "support": 12
+        "precision": 1.0,
+        "recall": 0.46153846153846156,
+        "f1": 0.631578947368421,
+        "support": 13
       },
       "Legal and investigations": {
-        "precision": 0.36363636363636365,
-        "recall": 0.6666666666666666,
-        "f1": 0.4705882352941177,
-        "support": 6
+        "precision": 0.4444444444444444,
+        "recall": 0.8,
+        "f1": 0.5714285714285714,
+        "support": 10
       }
     }
   },
   "predictions": [
-    {
-      "text": "What role do endorsements play in primary elections?",
-      "gold": "Elections",
-      "predicted": "Elections"
-    },
-    {
-      "text": "Is Israel an apartheid state?",
-      "gold": "Foreign Policy",
-      "predicted": "Foreign Policy"
-    },
-    {
-      "text": "How did ballot access laws affect third-party candidates in the last cycle?",
-      "gold": "Elections",
-      "predicted": "Elections"
-    },
-    {
-      "text": "What started the investigation(s) into the Prime Minister of Israel, Benjamin Netanyahu, and what charges have the police already recommended against him? Is there evidence to support Netanyahu's claim the investigation is biased against him?",
-      "gold": "Legal and investigations",
-      "predicted": "Legal and investigations"
-    },
-    {
-      "text": "What are the process and limits of the presidential pardon in light of Michael Flynn's lawyer stating it is \"An under-utilized tool of political power.\"",
-      "gold": "Executive Branch",
-      "predicted": "Legal and investigations"
-    },
-    {
-      "text": "How do local elections for school boards and city councils differ from national ones?",
-      "gold": "Elections",
-      "predicted": "Elections"
-    },
     {
       "text": "Do voters tend to punish the president's party in midterm elections?",
       "gold": "Elections",
       "predicted": "Elections"
     },
     {
-      "text": "Trump Elected President - What Comes Next",
-      "gold": "Executive Branch",
-      "predicted": "Elections"
-    },
-    {
-      "text": "What is birthright citizenship what are the pros and cons to birthright citizenship and what would the constitutionality be for an executive order to end birthright citizenship? (More in text)",
-      "gold": "Executive Branch",
-      "predicted": "Legal and investigations"
+      "text": "Is Chinese expansion a threat to the United States or the world?",
+      "gold": "Foreign Policy",
+      "predicted": "Foreign Policy"
     },
     {
       "text": "Is this election an [almost] perfect storm for a perfect a third party candidate? Or at least record-breaking voting for a third party candidate.",
@@ -87,57 +52,92 @@
       "predicted": "Elections"
     },
     {
-      "text": "What factors determine whether a state is considered a battleground?",
-      "gold": "Elections",
-      "predicted": "Elections"
-    },
-    {
-      "text": "2022 Georgia Elections: Conservative Activists Wage Campaign To Purge Voter Rolls Ahead Of The Nov. Election - The Physical Manifestation Of A Law Passed By The Republican-Controlled State Legislature In 2021",
-      "gold": "Elections",
-      "predicted": "Elections"
-    },
-    {
-      "text": "In light of Lebron James' announcement to support Clinton - What historical effect have high profile celebrities/athletes had on polling/voting in their respective state?",
-      "gold": "Elections",
-      "predicted": "Elections"
-    },
-    {
-      "text": "Is there legal precedent for Mueller's team behaviour regarding Concord Management's defence, and it is revealing of underlying issues with his legal case against them?",
+      "text": "Donna Brazile said the DNC\u2019s joint fundraising agreement with Hillary\u2019s campaign wasn\u2019t illegal. Does this hold water? How does US law regulate political parties anyway?",
       "gold": "Legal and investigations",
+      "predicted": "Elections"
+    },
+    {
+      "text": "What are the process and limits of the presidential pardon in light of Michael Flynn's lawyer stating it is \"An under-utilized tool of political power.\"",
+      "gold": "Executive Branch",
       "predicted": "Legal and investigations"
     },
     {
-      "text": "Are there any contingencies in place if the President of the U.S. makes false statements and/or spreads false information? Can a president or their administration be held accountable for making false statements and claiming them to be true?",
+      "text": "What are the consequences of the recent Italian election and the causes of the change in electoral makeup?",
+      "gold": "Elections",
+      "predicted": "Elections"
+    },
+    {
+      "text": "Is there any evidence that a candidate's height or appearance affects election outcomes?",
+      "gold": "Elections",
+      "predicted": "Elections"
+    },
+    {
+      "text": "What has the Trump administration done to combat the opioid crisis? What concrete plans do they have for the near future?",
       "gold": "Executive Branch",
       "predicted": "Executive Branch"
     },
     {
-      "text": "What are the arguments for and against the US engaging directly with an adversarial government?",
+      "text": "How much do the new sanctions on Iran differ from the sanctions imposed by Obama and Bush?",
       "gold": "Foreign Policy",
       "predicted": "Foreign Policy"
     },
     {
-      "text": "How do the major US parties handle deaths of presumptive nominees or nominees?",
+      "text": "What are the advantages and disadvantages of unconditionally allowing people to vote by mail?",
       "gold": "Elections",
       "predicted": "Elections"
     },
     {
-      "text": "What are the First Amendment implications now that Cowboys owner Jerry Jones has stated that players will be benched if they do not stand for the national anthem?",
-      "gold": "Executive Branch",
+      "text": "What are the pros and cons of South Dakota's recently overturned anti-corruption law?",
+      "gold": "Elections",
       "predicted": "Legal and investigations"
     },
     {
-      "text": "How does the Obama Administration's record on appointing donors and bundlers to government positions compare to Reagan, Bush 1&2 and Clinton administration.",
+      "text": "Does a candidate's fundraising total predict who will win?",
+      "gold": "Elections",
+      "predicted": "Elections"
+    },
+    {
+      "text": "What changes are required to safeguard elections?",
+      "gold": "Elections",
+      "predicted": "Elections"
+    },
+    {
+      "text": "What is the precedent for Law Enforcement refusing to enforce certain laws they find Unconstitutional, and how is this countered/balanced out?",
+      "gold": "Legal and investigations",
+      "predicted": "Legal and investigations"
+    },
+    {
+      "text": "What are the pros and cons of running the Executive Branch like a corporation?",
       "gold": "Executive Branch",
       "predicted": "Elections"
     },
     {
-      "text": "What are the biggest foreign policy challenges facing the next US president?",
+      "text": "Is the designation of the Iranian Islamic Revolutionary Guard as a terrorist organization an accurate characterization and what is the intended outcome of designating it as such?",
+      "gold": "Foreign Policy",
+      "predicted": "Legal and investigations"
+    },
+    {
+      "text": "McConnell says if Trump wins the nomination they will \"drop him like a hot rock,\" running negative ads to separate Trump from the Congressmen up for re-election. Would Trump stand a chance in the general if the Republican establishment essentially campaigns against him?",
+      "gold": "Elections",
+      "predicted": "Elections"
+    },
+    {
+      "text": "President Trump is ending health insurance subsidies for low income patients. What\u2019s the immediate effect for someone with a Marketplace Plan and how will this affect the Marketplace in 2018?",
+      "gold": "Executive Branch",
+      "predicted": "Executive Branch"
+    },
+    {
+      "text": "What role does the United Nations Security Council play in responding to international crises?",
       "gold": "Foreign Policy",
       "predicted": "Foreign Policy"
     },
     {
-      "text": "How accurate were last year's election forecasts compared with the final results?",
+      "text": "What options does the US have if a close ally acts against US interests?",
+      "gold": "Foreign Policy",
+      "predicted": "Foreign Policy"
+    },
+    {
+      "text": "What role do endorsements play in primary elections?",
       "gold": "Elections",
       "predicted": "Elections"
     },
@@ -147,43 +147,63 @@
       "predicted": "Legal and investigations"
     },
     {
-      "text": "The turnout in the French election is expected to reach 80% what causes higher turnout there than in the US?",
+      "text": "How do early voting periods vary across states?",
       "gold": "Elections",
       "predicted": "Elections"
     },
     {
-      "text": "What new information is contained in the 7/13 OSC indictments?",
+      "text": "California reduced the penalty for knowingly exposing a person to HIV from a felony to a misdemeanor. What are the arguments for and against this reduction?",
       "gold": "Legal and investigations",
       "predicted": "Legal and investigations"
     },
     {
-      "text": "Who is Mike Pence? What does he stand for? What has he accomplished?",
+      "text": "What happens when the Secret Service runs out of money?",
       "gold": "Executive Branch",
-      "predicted": "Executive Branch"
+      "predicted": "Elections"
     },
     {
-      "text": "One year after the Iran Deal, in what ways is the world better and worse off?",
-      "gold": "Foreign Policy",
-      "predicted": "Foreign Policy"
+      "text": "Sajid Javid defends deportation of grooming gang members",
+      "gold": "Legal and investigations",
+      "predicted": "Legal and investigations"
     },
     {
-      "text": "How does the number of resignations and firings during the Trump administration compare to past administrations?",
-      "gold": "Executive Branch",
-      "predicted": "Foreign Policy"
-    },
-    {
-      "text": "Allies have criticized a recent US decision on a foreign conflict. What are the main points of disagreement?",
-      "gold": "Foreign Policy",
-      "predicted": "Foreign Policy" 
-    },
-    {
-      "text": "What are the ethics law and precedent around unmasking anonymous people who allegedly oppose the US President?",
+      "text": "How much is Trump financially benefiting from this vacations?",
       "gold": "Executive Branch",
       "predicted": "Legal and investigations"
     },
     {
-      "text": "Congress has overridden Obama's veto on the 'Saudi Sept 11' bill. What are the consequences of this?",
+      "text": "Robert Mueller has been appointed a special counsel for the Russia probe. What is that and how does it work?",
+      "gold": "Legal and investigations",
+      "predicted": "Legal and investigations"
+    },
+    {
+      "text": "What public positions has Trump/The Trump Administration taken in respect to unions?",
       "gold": "Executive Branch",
+      "predicted": "Executive Branch"
+    },
+    {
+      "text": "What could a Vice President theoretically do in their capacity as \u201cPresident of the Senate?\u201d",
+      "gold": "Executive Branch",
+      "predicted": "Elections"
+    },
+    {
+      "text": "After President Trump\u2019s trip to Europe German Chancellor Angela Merkel said \"The times in which we could rely fully on others \u2014 they are somewhat over.\u201d Does this statement have precedent?",
+      "gold": "Foreign Policy",
+      "predicted": "Legal and investigations"
+    },
+    {
+      "text": "What happens when a country withdraws from the World Health Organization or a similar international body?",
+      "gold": "Foreign Policy",
+      "predicted": "Elections"
+    },
+    {
+      "text": "Could a wealthy enough President just pay for large public work initiatives by him/herself?",
+      "gold": "Executive Branch",
+      "predicted": "Elections"
+    },
+    {
+      "text": "Has the war in Afghanistan been a success, a failure, or otherwise, and why?",
+      "gold": "Foreign Policy",
       "predicted": "Foreign Policy"
     },
     {
@@ -192,74 +212,54 @@
       "predicted": "Legal and investigations"
     },
     {
-      "text": "What strategic benefits would North Korea gain from a preemptive attack on Guam?",
+      "text": "What led to the breakdown of arms control agreements between the US and Russia?",
       "gold": "Foreign Policy",
       "predicted": "Foreign Policy"
     },
     {
-      "text": "Can the Vice President force legislation from the U.S. House of Representatives before the U.S. Senate for a vote?",
-      "gold": "Executive Branch",
-      "predicted": "Executive Branch"
+      "text": "Could the House of Representatives reopen the impeachment inquiry and subpoena John Bolton to testify?",
+      "gold": "Legal and investigations",
+      "predicted": "Legal and investigations"
     },
     {
-      "text": "Why is the US relationship with Saudi Arabia considered strategically important?",
-      "gold": "Foreign Policy",
-      "predicted": "Foreign Policy"
-    },
-    {
-      "text": "What is the evidence for and against China being a competitor and/or threat to U.S. power?",
-      "gold": "Foreign Policy",
-      "predicted": "Foreign Policy"
-    },
-    {
-      "text": "Did AG Jeff Sessions commit perjury during his confirmation hearing when he didn\u2019t disclose prior meetings with the Russian Ambassador?",
+      "text": "Can the Attorney General or the President fire Geoffrey Berman the US Attorney for the Southern District of New York?",
       "gold": "Executive Branch",
       "predicted": "Legal and investigations"
     },
     {
-      "text": "The Trump Administration is investigating automakers for agreeing with California on emissions standards. Is this a legitimate antitrust issue",
-      "gold": "Legal and investigations",
-      "predicted": "Executive Branch"
-    },
-    {
-      "text": "Presidential Executive Order Amending Executive Order 13223: Who does this affect, and what historical precedents does this have?",
-      "gold": "Executive Branch",
-      "predicted": "Executive Branch"
-    },
-    {
-      "text": "How does the timing of a state's primary affect its influence?",
+      "text": "How do runoff elections work, and why do some states require them?",
       "gold": "Elections",
       "predicted": "Elections"
     },
     {
-      "text": "How does the US decide which countries receive foreign aid?",
-      "gold": "Foreign Policy",
-      "predicted": "Foreign Policy"
-    },
-    {
-      "text": "What have we learned from the principal conclusions of Robert Mueller\u2019s investigation released tonight?",
+      "text": "In Trump v. Hawaii (travel ban), the Supreme Court ruled the President's past statements should not be considered when reviewing that directive. Does this mean statements counter to Trump's Emergency Declaration, like \"I didn\u2019t need to do this,\" won't be considered in upcoming litigation?",
       "gold": "Legal and investigations",
-      "predicted": "Foreign Policy"
-    },
-    {
-      "text": "The Trump administration is looking at the possibility of direct cash payments to Americans to mitigate the economic hardships of Covid-19. Logistically how can the US government provide cash payments to citizens and has this ever been done before?",
-      "gold": "Executive Branch",
-      "predicted": "Executive Branch"
-    },
-    {
-      "text": "What are the jurisdictional relationships between the local police departments and many federal agencies in and around Washington, D.C.?",
-      "gold": "Executive Branch",
       "predicted": "Legal and investigations"
     },
     {
-      "text": "How does the US respond to competing territorial claims in the Arctic?",
-      "gold": "Foreign Policy",
-      "predicted": "Foreign Policy"
+      "text": "Did AG Jeff Sessions commit perjury during his confirmation hearing when he didn\u2019t disclose prior meetings with the Russian Ambassador?",
+      "gold": "Legal and investigations",
+      "predicted": "Legal and investigations"
     },
     {
-      "text": "What led to the breakdown of arms control agreements between the US and Russia?",
+      "text": "What does it mean when the US recognizes a disputed territory as part of another country?",
       "gold": "Foreign Policy",
-      "predicted": "Foreign Policy"
+      "predicted": "Legal and investigations"
+    },
+    {
+      "text": "How does the US respond when another country detains an American citizen abroad?",
+      "gold": "Foreign Policy",
+      "predicted": "Legal and investigations"
+    },
+    {
+      "text": "Congress has overridden Obama's veto on the 'Saudi Sept 11' bill. What are the consequences of this?",
+      "gold": "Foreign Policy",
+      "predicted": "Legal and investigations"
+    },
+    {
+      "text": "Do states typically have to guard supplies from the federal government? What is being done with the seized supplies?",
+      "gold": "Legal and investigations",
+      "predicted": "Elections"
     }
   ]
 }
