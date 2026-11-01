@@ -361,8 +361,8 @@ The overall results are ok but two classes ie "Executive Branch" an dthe "Legal 
 
 ## Stretch Feature 
 
-<!-- old content -->
-50 extra examples for the thinnest label In the earlier section when i discussed dataset I already covered how I augemtented the original 200 and in steps of 50 per class and performed various results. During this execrcise I also proved a better balanced dataset (or where class imballance is not extreme) results get better assuming we ahve good number of rows of data per class(mine were between 80 and 98)
+<!-- old content 
+50 extra examples for the thinnest label In the earlier section when i discussed dataset I already covered how I augemtented the original 200 and in steps of 50 per class and performed various results. During this execrcise I also proved a better balanced dataset (or where class imballance is not extreme) results get better assuming we ahve good number of rows of data per class(mine were between 80 and 98) -->
 
 <!-- updated content -->
 
@@ -431,35 +431,48 @@ Adding definitions improved overall accuracy from 77.8% to 84.4% and Macro F1 fr
 
 ---
 
-## Run Log — Before
+## Run Log — Before - ./results_three_seeds_before.json
 
 <!-- Five criteria across three seeds. The notebook's section 6 prints the
      spread table; the Target and Verdict columns are yours. -->
 
+Results from "results_three_seeds_before.json" use the targets in "criteria.md". Each seed has **45 test posts**: 10 Executive Branch, 10 Legal and investigations, 13 Foreign Policy, and 12 Elections. 
+
+For the per-label values below, the order of the values(label)  is **Executive Branch / Legal and investigations / Foreign Policy / Elections**.
+
 | Criterion | Target | Seed 42 | Seed 7 | Seed 2024 | Verdict |
 |---|---|---|---|---|---|
-| 1.  |  |  |  |  |  |
-| 2.  |  |  |  |  |  |
-| 3.  |  |  |  |  |  |
-| 4.  |  |  |  |  |  |
-| 5.  |  |  |  |  |  |
+| 1. Overall accuracy | ≥ 0.650 in every seed | 0.644 (29/45) | 0.733 (33/45) | 0.489 (22/45) | MISSED |
+| 2. Macro F1 | ≥ 0.650 in every seed | 0.555 | 0.696 | 0.401 | MISSED |
+| 3. F1 for every label | ≥ 0.70 / 0.60 / 0.60 / 0.55 in every seed | 0.421 / 0.167 / 0.774 / 0.857 | 0.462 / 0.700 / 0.788 / 0.833 | 0.182 / 0.182 / 0.542 / 0.700 | MISSED |
+| 4. Pooled recall: Legal, Foreign Policy, and Elections | ≥ 0.600 in every seed | 0.714 (25/35) | 0.857 (30/35) | 0.600 (21/35) | MET |
+| 5. Accuracy stability across seeds | Spread ≤ 0.10 for overall accuracy and every class | Overall 0.644; recall 0.400 / 0.100 / 0.923 / 1.000 | Overall 0.733; recall 0.300 / 0.700 / 1.000 / 0.833 | Overall 0.489; recall 0.100 / 0.100 / 1.000 / 0.583 | MISSED |
+
+For criterion 5, per-class accuracy is recall: correct predictions divided by the number of true posts in that class. Spread is the maximum minus the minimum across the three seeds: **0.244 overall**, and **0.300 / 0.600 / 0.077 / 0.417** for the classes in the order above. Only Foreign Policy meets the 0.10 spread limit; overall accuracy and the other three classes exceed it so it is **missed**.
 
 ### Confusion matrix
 
 <!-- ⚠️ TYPED AS A MARKDOWN TABLE. The notebook prints one ready to paste.
      An image of a matrix earns nothing. -->
 
-| true \ predicted |  |  |  |
-|---|---|---|---|
-| **** |  |  |  |
-| **** |  |  |  |
-| **** |  |  |  |
+**Seed 42 —: 45 test reditt posts:** "results.json" and "results_three_seeds_before.json" show **29 correct predictions and 16 errors**, giving **64.4% accuracy** and **0.555 Macro F1**. 
+
+| true \ predicted | Executive Branch | Legal and investigations | Foreign Policy | Elections |
+|---|---|---|---|---|
+| **Executive Branch** | 4 | 1 | 2 | 3 |
+| **Legal and investigations** | 4 | 1 | 4 | 1 |
+| **Foreign Policy** | 1 | 0 | 12 | 0 |
+| **Elections** | 0 | 0 | 0 | 12 |
+
 
 **My biggest off-diagonal number, and what it means:**
 <!-- Not "the model made mistakes" — WHICH boundary it didn't learn, and which
      direction. "7 real analysis posts were called hot_take and only 3 went the
      other way" is a direction, not just an error rate. -->
 
+The largest off-diagonal count is **4**, shared by two errors: **4 true Legal and investigations posts were predicted as Executive Branch**, compared with **1 Executive Branch post predicted as Legal**, and **4 true Legal posts were predicted as Foreign Policy**, compared with **0 Foreign Policy posts predicted as Legal**. Of the **10 true Legal posts**, only **1 was classified correctly (10% recall)**; the remaining error was predicted as Elections. These misclassification shows Legal and investigations are  getting misclaffied the most  and it is going towards Executive Branch or Foreign policy. On the other hand Executive Brnach is getting miscalssified to other three labls in smaller way. The biggest offdiagonal number tell us where in the overall classification the biggest problems are  and how widespread that problem is
+
+**Since misclassification is spread across multiple classes and happening on multiple classes so it could also be a training issues. So we will try to fine tune with larger number of epochs before going deep into other things**
 
 
 ---
@@ -469,13 +482,17 @@ Adding definitions improved overall accuracy from 77.8% to 84.4% and Macro F1 fr
 <!-- MET or MISSED against LAST UNIT's target. The target has to hold across
      all three seeds, not turn up sometimes. -->
 
+Verdicts use `results.json` (seed 42) and `results_three_seeds_before.json` (seeds 42, 7, and 2024), with 45 test posts per run. Results below follow that seed order. Displayed values are rounded to three decimals; verdicts use unrounded values.
+
 | # | Criterion | Target | Verdict | How I decided |
 |---|---|---|---|---|
-| 1 |  |  |  |  |
-| 2 |  |  |  |  |
-| 3 |  |  |  |  |
-| 4 |  |  |  |  |
-| 5 |  |  |  |  |
+| 1 | Overall accuracy | ≥ 0.650 in every seed | MISSED | Seeds 42 (0.644) and 2024 (0.489) fall below target; only seed 7 (0.733) passes. With 45 test posts, at least 30 correct predictions are required; the runs have 29, 33, and 22. |
+| 2 | Macro F1 | ≥ 0.650 in every seed | MISSED | Seeds 42 (0.555) and 2024 (0.401) fail; seed 7 (0.696) passes. Weak Executive and Legal F1 scores lower the equal-weight average across labels. |
+| 3 | F1 for every label | Executive ≥ 0.70; Legal ≥ 0.60; Foreign Policy ≥ 0.60; Elections ≥ 0.55, in every seed | MISSED | Executive fails in all three seeds (0.421, 0.462, 0.182). Legal scores 0.167, 0.700, and 0.182, passing only seed 7. Foreign Policy scores 0.774, 0.788, and 0.542, failing seed 2024. Elections passes in all three seeds (0.857, 0.833, 0.700). |
+| 4 | Pooled recall: Legal, Foreign Policy, and Elections | ≥ 0.600 in every seed | MET | Correct predictions across these three labels total 25/35, 30/35, and 21/35: recall of 0.714, 0.857, and 0.600. All meet the target, although the pooled score masks weak Legal recall. |
+| 5 | Accuracy stability across seeds | Spread ≤ 0.10 for overall accuracy and every class | MISSED | Overall accuracy spread is 33/45 − 22/45 = 11/45 ≈ 0.244. Per-class recall spreads are Executive 0.300, Legal 0.600, Foreign Policy 0.077, and Elections 0.417. Only Foreign Policy meets the 0.10 limit; overall accuracy and the other three classes exceed it. |
+
+
 
 **Diagnoses**
 
@@ -488,7 +505,13 @@ Adding definitions improved overall accuracy from 77.8% to 84.4% and Macro F1 fr
      have that can tell a LABELLING problem from a MODEL problem, and this
      section is graded on whether you used it that way. -->
 
+**Criteria 1–3: weak recognition of Executive and Legal posts.** Executive recall is **0.400, 0.300, and 0.100**, and Legal recall is **0.100, 0.700, and 0.100**. In seed 42, four true Legal posts are predicted as Executive, compared with one Executive post predicted as Legal. Another four Legal posts are predicted as Foreign Policy, with none going the other way. These errors explain the low Executive and Legal F1 scores and contribute to the missed accuracy and Macro F1 targets.
 
+In seed 2024, the problem extends beyond the Executive–Legal boundary: the model predicts Foreign Policy for **35 of 45 posts**, including **9 of 10 true Executive posts**, **8 of 10 true Legal posts**, and **5 of 12 true Elections posts**. The largest off-diagonal count across all three runs is those nine Executive posts called Foreign Policy, with zero Foreign Policy posts called Executive in that seed. Foreign Policy recall is perfect, but its precision is only **13/35 = 0.371**, bringing its F1 down to **0.542**. This also explains how criterion 4 can pass at **21/35 = 0.600** despite only one correct Legal prediction: Foreign Policy and Elections supply the other 20 correct predictions.
+
+**Criterion 5: performance varies substantially across seeds.** Overall accuracy ranges from **48.9% to 73.3%**, a **24.4 percentage-point spread**, while Legal recall ranges from **10% to 70%**. The number of Foreign Policy predictions rises from **18** in seed 42 and **20** in seed 7 to **35** in seed 2024. The model's tendency to favor this label varies across runs, even though each test set has the same class counts. Foreign Policy's stable recall therefore does not imply stable performance across all metrics; its F1 still misses the target in seed 2024.
+
+**Since misclassification is spread across multiple classes and happening on multiple classes so it could also be a training issues. So we will try to fine tune with larger number of epochs before going deep into other things. Even the dtaset behaves very differently across different seeds that either says either the representative data in each class is low, or the classes have overlap which is possible in my domain that i picked or it could be training. So I will start with training(as it will be very quick to rule out by doing a little more training) and then look into other areas**
 
 ---
 

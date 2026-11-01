@@ -162,7 +162,18 @@ The **highest test accuracy minus the lowest test accuracy across seeds 42,
 **Why this target:** Each current test set contains only 30 posts, so one
 prediction changes accuracy by about 3.3 percentage points. A 10-point limit
 allows a difference equivalent to three correct predictions while rejecting
-larger swings caused by which small-category posts enter the split. So depending on how the split is done we may have slightly inferior perfromance for label calss other that Executuve Branch(executing branch has 98 rows out of 200 and we have four labels and others are in 30 to 40 count range) 
+larger swings caused by which small-category posts enter the split. So depending on how the split is done we may have slightly inferior performance for label class other that Executuve Branch(executing branch has 98 rows out of 200 and we have four labels and others are in 30 to 40 count range) 
+
+<!-- ──────UNIT 6 — Criteria language changed without change in value -->.
+───────────────────────────────────────────────────────────────────
+  When I red this criteria i see mistake 
+    >**Revised in Unit 6 to correct the criteria** 
+      The highlevel remains the same the change is at individual verbiage linked to it.
+      The **highest test accuracy minus the lowest test accuracy across seeds 42,7, and 2024 must be no greater than 0.1** 
+    > **Why revised:**
+      Since I added 50 more rows to the thinnest class the dataset is not that imbalanced. So I am looking for tighter performance. Previously I allowed classes to haev spread upto 0.15 but I am trying to now keep it to 0.10.  if it fails I will try to find th reason behind it. I also has incorrect lable which after I corrected the counts changed including Executive branch which the new count came down to 68 from 97 and "Legal and investigations" went up from 19 to 68. Due to this i believe i should target tighter criteria than stated before.
+
+
 
 ---
 
