@@ -149,9 +149,9 @@ The file contains three columns:
 
 Executive Branch represents nearly half the dataset, so I expect the additional examples may help the model learn that category. Legal and Investigations accounts for 19.5%, while Elections is the smallest category at 15.5%. With only 200 posts across four classes, the smaller categories have limited examples in each split, and performance may vary with the split and random seed. These are expectations to test with per-class metrics and a confusion matrix.
 
-<!-- ⚠️ WHAT CHANGED : labels.csv when I started working on Unit 6 I found misclassification and realized my labeling was not correct. I went through all the labels and changed lables base dont he definitions so as the classification improves and the training dataset is good quality. The subreditt gave me 200 records I added another 50 synthetic data collecting through gemini and added at the end so as I have foreign policy as a small dataset and total records is 250 instead of 200.   -->
+<!-- ⚠️ WHAT CHANGED : labels.csv when I started working on Unit 6 I found misclassification and realized my labeling was not correct. I went through all the labels and changed lables base dont he definitions so as the classification improves and the training dataset is good quality. The subreditt gave me 200 records I added another 50 synthetic data collecting through gemini for Elections class and have Foreign policy as a small dataset and total records is 250 instead of 200.   -->
 
-**Counts per label after relabling but before dding more data to Foreign Policy label class:** 
+**Counts per label after relabling but before dding more data to Elections label class:** 
 
 | Label | Count | Share |
 |---|---:|---:|
@@ -161,6 +161,8 @@ Executive Branch represents nearly half the dataset, so I expect the additional 
 | Elections | 77 | 30.8% |
 | **Total** | **250** | **100.0%** |
 
+
+<!-- Stretch feature add 50 more to the thinnest class i.e Foreign POlicy in my case -->
 **Counts per label after relabling and adding more data to Foreign Policy class:** 
 
 
